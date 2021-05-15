@@ -32,3 +32,15 @@ class PostListView(View):
         }
 
         return render(request, 'social/post_list.html', context)
+
+
+# functionality for commenting on posts
+class PostDetailView(View):
+    def get(self, request, pk, *args, **kwargs):
+        post = Post.objects.get(pk=pk)
+
+        context = {
+            'post': post
+        }
+
+        return render(request, 'social/post_detail.html', context)
