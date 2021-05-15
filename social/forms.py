@@ -1,10 +1,10 @@
 from django import forms
-from .models import Post
+from .models import Post, Comment
 
 
 class PostForm(forms.ModelForm):
     '''
-    Makes the form smaller, removes the label and add a placehplder to the field
+    Makes the form smaller, removes the label and add a placeholder to the field
     '''
     body = forms.CharField(
         label='',
@@ -16,3 +16,19 @@ class PostForm(forms.ModelForm):
     class Meta:
         model = Post
         fields = ['body']
+
+
+class CommentForm(forms.ModelForm):
+    '''
+    Makes the form smaller, removes the label and add a placeholder to the field
+    '''
+    comment = forms.CharField(
+        label='',
+        widget=forms.Textarea(attrs={
+            'rows': '3',
+            'placeholder': 'Say something...'
+        }))
+
+    class Meta:
+        model = Comment
+        fields = ['comment']
