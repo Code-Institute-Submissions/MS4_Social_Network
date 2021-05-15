@@ -147,7 +147,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 # Redirect to landingpage after login
-LOGIN_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'post-list'
 # Make email required when signing up
 ACCOUNT_EMAIL_REQUIRED = True
 # Send emails to the terminal
