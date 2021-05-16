@@ -1,12 +1,13 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.views import View
 from django.views.generic.edit import UpdateView, DeleteView
 from .models import Post, Comment
 from .forms import PostForm, CommentForm
 
 
-class PostListView(View):
+class PostListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
         posts = Post.objects.all().order_by('-created_on')
         form = PostForm()
@@ -32,7 +33,8 @@ class PostListView(View):
         }
         return render(request, 'social/post_list.html', context)
 
-class PostDetailView(View):
+
+class PostDetailView(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
         form = CommentForm()
@@ -55,7 +57,7 @@ class PostDetailView(View):
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
-        
+  
         comments = Comment.objects.filter(post=post).order_by('-created_on')
 
         context = {
@@ -66,25 +68,34 @@ class PostDetailView(View):
 
         return render(request, 'social/post_detail.html', context)
 
-class PostEditView(UpdateView):
+
+class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['body']
     template_name = 'social/post_edit.html'
-    
+
     def get_success_url(self):
         pk = self.kwargs['pk']
         return reverse_lazy('post-detail', kwargs={'pk': pk})
-    
+
+    # If the user logged in is author of post give them access to edit post otherwise throw 403 error
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
 
-class PostDeleteView(DeleteView):
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'social/post_delete.html'
     success_url = reverse_lazy('post-list')
 
+    # If the user logged in is author of post give them access to delete post otherwise throw 403 error
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
 
-class CommentDeleteView(DeleteView):
+class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = 'social/comment_delete.html'
 
@@ -92,12 +103,22 @@ class CommentDeleteView(DeleteView):
         pk = self.kwargs['post_pk']
         return reverse_lazy('post-detail', kwargs={'pk': pk})
 
+    # If the user logged in is author of post give them access to delete comments otherwise throw 403 error
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
 
-class CommentEditView(UpdateView):
-    model = Post
-    fields = ['body']
+
+class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = Comment
+    fields = ['comment']
     template_name = 'social/comment_edit.html'
-  
+
     def get_success_url(self):
-        pk = self.kwargs['pk']
+        pk = self.kwargs['post_pk']
         return reverse_lazy('post-detail', kwargs={'pk': pk})
+
+    # If the user logged in is author of post give them access to edit comments otherwise throw 403 error
+    def test_func(self):
+        post = self.get_object()
+        return self.request.user == post.author
