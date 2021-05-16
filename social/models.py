@@ -14,5 +14,5 @@ class Post(models.Model):
 class Comment(models.Model):
     comment = models.TextField()
     created_on = models.DateTimeField(default=timezone.now) # when the user post, its the the exact time
-    auther = models.ForeignKey(User, on_delete=models.CASCADE)  # find the current user that creates the post
+    author = models.ForeignKey(User, on_delete=models.CASCADE)  # find the current user that creates the post
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
