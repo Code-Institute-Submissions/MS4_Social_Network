@@ -4,10 +4,16 @@
 
 {% block content %}
     <div class="container">
+        <!-- Gets back to feed -->
+        <div class="row mt-5">
+            <div class="col-md-5 col-sm-6">
+                <a href="{% url 'post-list' %}" class="btn btn-light">Back to Feed</a>
+            </div>
+        </div>
         <!-- Add post header -->
         <div class="row justify-content-center mt-3">
             <div class="col-md-5 col-sm-12 border-bottom text-center">
-                <h5>Add a Post!</h5>
+                <h5>Update Your Post!</h5>
             </div>
         </div>
         <!-- adds the post -->
@@ -24,15 +30,5 @@
                 </form>
             </div>
         </div>
-        <!-- shows the post -->
-        {% for post in post_list %}
-        <div class="row justify-content-center mt-3">
-            <div class="col-md-5 col-sm-12 border-bottom position-relative">
-                <p><strong>{{ post.author }}</strong> {{ post.created_on }}</p>
-                <p>{{ post.body }}</p>
-                <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
-            </div>
-        </div>
-        {% endfor %}
     </div>
 {% endblock content %}
