@@ -57,7 +57,7 @@ class PostDetailView(LoginRequiredMixin, View):
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
-  
+
         comments = Comment.objects.filter(post=post).order_by('-created_on')
 
         context = {
@@ -69,6 +69,7 @@ class PostDetailView(LoginRequiredMixin, View):
         return render(request, 'social/post_detail.html', context)
 
 
+# Function for user to edit post
 class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
     fields = ['body']
@@ -84,6 +85,7 @@ class PostEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == post.author
 
 
+# Function for user to delete post
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Post
     template_name = 'social/post_delete.html'
@@ -95,6 +97,7 @@ class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == post.author
 
 
+# Function for user to delete comments
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Comment
     template_name = 'social/comment_delete.html'
@@ -109,6 +112,7 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
         return self.request.user == post.author
 
 
+# Function for user to edit comments
 class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Comment
     fields = ['comment']
