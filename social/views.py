@@ -128,6 +128,7 @@ class CommentEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == post.author
 
 
+# Function for user to view there profile
 class ProfileView(View):
     def get(self, request, pk, *args, **kwargs):
         profile = UserProfile.objects.get(pk=pk)
@@ -141,3 +142,19 @@ class ProfileView(View):
         }
 
         return render(request, 'social/profile.html', context)
+
+
+# Function for user to edit there view
+class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
+    model = UserProfile
+    fields = ['name', 'bio', 'birth_date', 'location', 'picture']
+    template_name = 'social/profile_edit.html'
+
+    def get_success_url(self):
+        pk = self.kwargs['pk']
+        return reverse_lazy('profile', kwargs={'pk': pk})
+
+    # If the user == profile user send to view otherwise throw 403 error
+    def test_func(self):
+        profile = self.get_object()
+        return self.request.user == profile.user
