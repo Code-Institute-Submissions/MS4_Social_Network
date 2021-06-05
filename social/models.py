@@ -17,7 +17,7 @@ class Post(models.Model):
 # Comment model
 class Comment(models.Model):
     comment = models.TextField()
-    created_on = models.DateTimeField(default=timezone.now) # when the user post, its the the exact time
+    created_on = models.DateTimeField(default=timezone.now)  # when the user post, its the the exact time
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # find the current user that creates the post
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
 
@@ -35,11 +35,9 @@ class UserProfile(models.Model):
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
-	if created:
-		UserProfile.objects.create(user=instance)
+    if created:
+        UserProfile.objects.create(user=instance)
 
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
-	instance.profile.save()
-
-    
+    instance.profile.save()

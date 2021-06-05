@@ -16,8 +16,8 @@
             <p>
                 <strong>{{ post.author }}</strong> {{ post.created_on }}
                 {% if request.user == post.author %}
-                <a href="{% url 'post-edit' post.pk %}" style="color: #333;"><i class="far fa-edit"></i></a>
-                <a href="{% url 'post-delete' post.pk %}" style="color: #333;"><i class="fas fa-trash"></i></a>
+                <a href="{% url 'post-edit' post.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
+                <a href="{% url 'post-delete' post.pk %}" class="edit-color"><i class="fas fa-trash"></i></a>
                 {% endif %}
             </p>
             <p>{{ post.body }}</p>
@@ -26,7 +26,7 @@
                 <form method="POST" action="{% url 'like' post.pk %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                    <button class="remove-default-btn" type="submit">
                         <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
                     </button>
                 </form>
@@ -34,7 +34,7 @@
                 <form method="POST" action="{% url 'dislike' post.pk %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button style="background-color: transparent; border: none; box-shadow: none;" type="submit">
+                    <button class="remove-default-btn" type="submit">
                         <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
                     </button>
                 </form>
@@ -64,8 +64,8 @@
             <p>
                 <strong>{{ comment.author }}</strong> {{ comment.created_on }}
                 {% if request.user == comment.author %}
-                <a href="{% url 'comment-edit' post.pk comment.pk %}" style="color: #333;"><i class="fas fa-edit"></i></a>
-                <a href="{% url 'comment-delete' post.pk comment.pk %}" style="color: #333;"><i class="fas fa-trash"></i></a>
+                <a href="{% url 'comment-edit' post.pk comment.pk %}" class="edit-color"><i class="fas fa-edit"></i></a>
+                <a href="{% url 'comment-delete' post.pk comment.pk %}" class="edit-color"><i class="fas fa-trash"></i></a>
                 {% endif %}
             </p>
             <p>{{ comment.comment }}</p>
