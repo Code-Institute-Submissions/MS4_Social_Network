@@ -12,7 +12,16 @@
         {% for profile in profile_list %}
             <div class="row justify-content-center mt-3">
                 <div class="col-md-5 col-sm-12 border-bottom position-relative">
-                    <p><a class="text-primary post-link" href="{% url 'profile' profile.pk %}">@{{ profile.user }}</a></p>
+                    <div class="py-3">
+                        <a href="{% url 'profile' profile.pk %}">
+                            <img class="rounded-circle post-img" height="45" width="45" src="{{ profile.picture.url }}">
+                        </a>
+                        <p class="post-text">
+                            <a href="{% url 'profile' profile.pk %}" class="text-primary post-link">
+                            <span> {{ profile.user }}</span></a>
+                            </a>
+                        </p>
+                    </div>
                     {% if profile.location %}
                         <p>{{ profile.location }}</p>
                     {% endif %}
