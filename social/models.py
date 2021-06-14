@@ -20,6 +20,8 @@ class Comment(models.Model):
     created_on = models.DateTimeField(default=timezone.now)  # when the user post, its the the exact time
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # find the current user that creates the post
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
+    likes = models.ManyToManyField(User, blank=True, related_name='comment_likes')
+    dislikes = models.ManyToManyField(User, blank=True, related_name='comment_dislikes')
 
 
 # Profile model ( One user profile per user, on_delete= delete all)
