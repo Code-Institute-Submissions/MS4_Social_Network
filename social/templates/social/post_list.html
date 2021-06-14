@@ -6,18 +6,18 @@
     <div class="container">
         <!-- Add post header -->
         <div class="row justify-content-center mt-3">
-            <div class="col-md-5 col-sm-12 border-bottom text-center">
-                <h5>Add a Post!</h5>
+            <div class="col-md-5 col-sm-12 text-center">
+                <h3>Add a Post!</h3>
             </div>
         </div>
         <!-- adds the post -->
         <div class="row justify-content-center mt-3 mb-5">
-            <div class="col-md-5 col-sm-12 border-bottom">
+            <div class="col-md-6 col-sm-8">
                 <form method="Post">
                     {% csrf_token %}
                     {{ form | crispy }}
-                    <div class="d-grid gap-2">
-                        <button class="btn btn-success mt-3">
+                    <div class="d-grid gap-2 col-md-4 offset-md-4">
+                        <button class="btn btn-primary mt-5">
                             Post
                         </button>
                     </div>
@@ -27,19 +27,20 @@
         <!-- shows the post -->
         {% for post in post_list %}
         <div class="row justify-content-center mt-3">
-            <div class="col-md-5 col-sm-12 border-bottom position-relative">
-                <div class="py-3">
+            <div class="col-md-8 col-sm-8 position-relative card">
+                <div class="py-3 card-body">
                     <a href="{% url 'profile' post.author.profile.pk %}">
-                        <img class="rounded-circle post-img" height="45" width="45" src="{{ post.author.profile.picture.url }}">
+                        <img class="rounded-circle post-img" height="60" width="60" src="{{ post.author.profile.picture.url }}">
                     </a>
                     <p class="post-text">
                         <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
-                        <span> {{ post.author }}</span></a> {{ post.created_on }}
+                        <h5> {{ post.author }}</h5></a>
+                        <p>{{ post.created_on }}</p>
                         </a>
                     </p>
                 </div>
                     
-                <div class="position-relative">
+                <div class="position-relative ms-3 post-body-text">
                     <p>{{ post.body }}</p>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                 </div>
@@ -47,8 +48,8 @@
                     <form method="POST" action="{% url 'like' post.pk %}">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ request.path }}">
-                        <button class="remove-default-btn" type="submit">
-                            <i class="far fa-grin-beam"> <span>{{ post.likes.all.count }}</span></i>
+                        <button onclick="changeBlue()" class="remove-default-btn" type="submit">
+                            <i id="hey" class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
                         </button>
                     </form>
 
@@ -56,7 +57,7 @@
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ request.path }}">
                         <button class="remove-default-btn" type="submit">
-                            <i class="far fa-meh"> <span>{{ post.dislikes.all.count }}</span></i>
+                            <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
                         </button>
                     </form>
                 </div>

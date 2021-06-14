@@ -26,7 +26,27 @@
     font-size: 60px;
 }
 
-/*  */
+body {
+    background-color: rgba(168, 248, 228, 0.1);
+}
+
+.card {
+    
+    border: 1px solid grey;
+}
+
+/* post_list.hmtl */
+
+.post-body-text {
+    font-size: 26px;
+}
+
+.remove-default-btn i {
+    font-size: 20px;
+}
+
+
+
 
 .remove-default-btn {
     background-color: transparent;
@@ -49,4 +69,13 @@
 .post-img {
     float: left;
     margin-right: 1rem;
+}
+
+
+/* profile.hmtl */
+
+#profile-img {
+    border: 3px solid black;
+    margin-left: 14vw;
+    margin-bottom: 40px;
 }
