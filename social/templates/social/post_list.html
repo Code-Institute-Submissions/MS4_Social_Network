@@ -13,7 +13,7 @@
         <!-- adds the post -->
         <div class="row justify-content-center mt-3 mb-5">
             <div class="col-md-6 col-sm-8">
-                <form method="Post">
+                <form method="Post" enctype="multipart/form-data">
                     {% csrf_token %}
                     {{ form | crispy }}
                     <div class="d-grid gap-2 col-md-4 offset-md-4">
@@ -41,6 +41,9 @@
                 </div>
                     
                 <div class="position-relative ms-3 post-body-text">
+                    {% if post.image %}
+                        <img src="{{ post.image.url }}" class="post-image">
+                    {% endif %}
                     <p>{{ post.body }}</p>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                 </div>
@@ -48,7 +51,7 @@
                     <form method="POST" action="{% url 'like' post.pk %}">
                         {% csrf_token %}
                         <input type="hidden" name="next" value="{{ request.path }}">
-                        <button onclick="changeBlue()" class="remove-default-btn" type="submit">
+                        <button class="remove-default-btn" type="submit">
                             <i id="hey" class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
                         </button>
                     </form>

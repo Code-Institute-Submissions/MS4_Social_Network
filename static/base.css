@@ -85,3 +85,10 @@ body {
 .child-comment {
     margin-left: 2rem;
 }
+
+.post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
+}

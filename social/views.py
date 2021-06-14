@@ -15,7 +15,6 @@ class PostListView(LoginRequiredMixin, View):
         posts = Post.objects.filter(
             author__profile__followers__in=[logged_in_user.id]    
         ).order_by('-created_on')
-        posts = Post.objects.all().order_by('-created_on')
         form = PostForm()
 
         context = {
@@ -25,8 +24,11 @@ class PostListView(LoginRequiredMixin, View):
         return render(request, 'social/post_list.html', context)
 
     def post(self, request, *args, **kwargs):
-        posts = Post.objects.all().order_by('-created_on')
-        form = PostForm(request.POST)
+        logged_in_user = request.user
+        posts = Post.objects.filter(
+            author__profile__followers__in=[logged_in_user.id]    
+        ).order_by('-created_on')
+        form = PostForm(request.POST, request.FILES)
 
         if form.is_valid():
             new_post = form.save(commit=False)

@@ -7,7 +7,8 @@ from django.dispatch import receiver
 
 # Post model
 class Post(models.Model):
-    body = models.TextField()  # What the user tipes in on the post 
+    body = models.TextField()  # What the user tipes in on the post
+    image = models.ImageField(upload_to='uploads/post_photos', blank=True, null=True) 
     created_on = models.DateTimeField(default=timezone.now)  # when the user post, its the the exact time
     author = models.ForeignKey(User, on_delete=models.CASCADE)  # find the current user that creates the post
     likes = models.ManyToManyField(User, blank=True, related_name='likes')
