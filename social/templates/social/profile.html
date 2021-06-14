@@ -9,7 +9,7 @@
             </div>
         </div>
         <div class="row justify-content-center text-center mt-5">
-            <div class="card shadow-sm col-md-8 col-sm-12 pt-3">
+            <div class="card shadow col-md-8 col-sm-8 pt-3 border-bottom">
                 <img src="{{ profile.picture.url }}" id="profile-img" class="rounded-circle" width="300" height="300">
                     {% if profile.name %}
                         <h3 class="py-2">{{ profile.name }}
@@ -57,23 +57,25 @@
         </div>
         <!-- shows the post -->
         {% for post in posts %}
-        <div class="row justify-content-center mt-5">
-            <div class="col-md-8 col-sm-12 card">
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-8 col-sm-8 card shadow rounded">
                 <div class="py-3 card-body">
                     <a href="{% url 'profile' post.author.profile.pk %}">
-                        <img class="rounded-circle post-img" height="45" width="45" src="{{ post.author.profile.picture.url }}">
+                        <img class="rounded-circle post-img" height="60" width="60" src="{{ post.author.profile.picture.url }}">
                     </a>
                     <p class="post-text">
                         <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
-                        <span> {{ post.author }}</span></a> {{ post.created_on }}
+                        <h5> {{ post.author }}</h5></a>
+                        <p class="border-bottom">{{ post.created_on }}</p>
                         </a>
                     </p>
                 </div>
-                <div class="position-relative">
+                    
+                <div class="position-relative ms-3 post-body-text">
                     {% if post.image %}
-                        <img src="{{ post.image.url }}" class="post-image">
+                        <img src="{{ post.image.url }}" class="post-image border-bottom">
                     {% endif %}
-                    <p>{{ post.body }}</p>
+                    <p class="border-bottom">{{ post.body }}</p>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                 </div>
                 <div class="d-flex flex-row">

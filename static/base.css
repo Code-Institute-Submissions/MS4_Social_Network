@@ -1,4 +1,10 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@1,100&display=swap');
+
 /* index.html */
+
+i p {
+    font-family: 'Courier New', Courier, monospace;
+}
 
 .landing-img {
     position: absolute;
@@ -27,12 +33,7 @@
 }
 
 body {
-    background-color: rgba(168, 248, 228, 0.1);
-}
-
-.card {
-    
-    border: 1px solid grey;
+    background-color: rgba(0, 0, 0, 0.03);
 }
 
 /* post_list.hmtl */
@@ -44,14 +45,16 @@ body {
 .remove-default-btn i {
     font-size: 20px;
 }
-
-
-
+.remove-default-btn i p {
+    font-family: 'Courier New', Courier, monospace;
+}
 
 .remove-default-btn {
     background-color: transparent;
     border: none;
     box-shadow: none;
+
+    display:inline-block;
 }
 
 .edit-color {
@@ -74,11 +77,7 @@ body {
 
 /* profile.hmtl */
 
-#profile-img {
-    border: 3px solid black;
-    margin-left: 14vw;
-    margin-bottom: 40px;
-}
+
 
 /* comment on comment */
 
@@ -91,4 +90,18 @@ body {
     height: auto;
     border-radius: 10px;
     margin-bottom: 10px;
+}
+
+/* Post Image */
+
+#div_id_image label {
+    display: none;
+}
+
+#div_id_image {
+    margin: 20px; 
+}
+
+.post-container {
+    margin-top: 10px;
 }

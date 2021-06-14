@@ -5,6 +5,7 @@
 {% block content %}
     <div class="container">
         <!-- Add post header -->
+        <div class="post-container">
         <div class="row justify-content-center mt-3">
             <div class="col-md-5 col-sm-12 text-center">
                 <h3>Add a Post!</h3>
@@ -24,10 +25,11 @@
                 </form>
             </div>
         </div>
+        </div>
         <!-- shows the post -->
         {% for post in post_list %}
-        <div class="row justify-content-center mt-3">
-            <div class="col-md-8 col-sm-8 position-relative card">
+        <div class="row justify-content-center mb-3">
+            <div class="col-md-8 col-sm-8 position-relative card shadow rounded">
                 <div class="py-3 card-body">
                     <a href="{% url 'profile' post.author.profile.pk %}">
                         <img class="rounded-circle post-img" height="60" width="60" src="{{ post.author.profile.picture.url }}">
@@ -35,16 +37,16 @@
                     <p class="post-text">
                         <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
                         <h5> {{ post.author }}</h5></a>
-                        <p>{{ post.created_on }}</p>
+                        <p class="border-bottom">{{ post.created_on }}</p>
                         </a>
                     </p>
                 </div>
                     
                 <div class="position-relative ms-3 post-body-text">
                     {% if post.image %}
-                        <img src="{{ post.image.url }}" class="post-image">
+                        <img src="{{ post.image.url }}" class="post-image border-bottom">
                     {% endif %}
-                    <p>{{ post.body }}</p>
+                    <p class="border-bottom">{{ post.body }}</p>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                 </div>
                 <div class="d-flex flex-row">
