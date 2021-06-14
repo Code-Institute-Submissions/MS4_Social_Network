@@ -22,6 +22,17 @@ class Comment(models.Model):
     post = models.ForeignKey('Post', on_delete=models.CASCADE)
     likes = models.ManyToManyField(User, blank=True, related_name='comment_likes')
     dislikes = models.ManyToManyField(User, blank=True, related_name='comment_dislikes')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
+
+    @property # Decorator to make it more easely to access this function
+    def children(self):
+        return Comment.objects.filter(parent=self).order_by('-created_on').all()
+
+    @property # check if is parent
+    def is_parent(self):
+        if self.parent is None:
+            return True
+        return False
 
 
 # Profile model ( One user profile per user, on_delete= delete all)

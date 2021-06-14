@@ -1,7 +1,10 @@
-function openForm() {
-  document.getElementById("myForm").style.display = "block";
-}
+// function for the comment button to hide or show comments
+function commentReplyToggle(parent_id) {
+    const row = document.getElementById(parent_id);
 
-function closeForm() {
-  document.getElementById("myForm").style.display = "none";
+    if (row.classList.contains('d-none')) {
+        row.classList.remove('d-none');
+    } else {
+        row.classList.add('d-none');
+    }
 }
