@@ -20,3 +20,15 @@ openPopup1.addEventListener('click', () => {
 closePopup1.addEventListener('click', () => {
 	popup1.style.display = "none";
 })
+
+var popup2 = document.getElementById("popup-2")
+var openPopup2 = document.getElementById("open-popup-2")
+var closePopup2 = document.getElementById('close-popup-2')
+
+openPopup2.addEventListener('click', () => {
+	popup2.style.display = "block";
+})
+
+closePopup2.addEventListener('click', () => {
+	popup2.style.display = "none";
+})
