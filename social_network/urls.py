@@ -23,7 +23,7 @@ urlpatterns = [
     path('', include('landing.urls')),
     path('accounts/', include('allauth.urls')),
     path('social/', include('social.urls')),
-    path('', include('donation.urls')),
+    path('donation/', include('donation.urls')),
 ]
 
 if settings.DEBUG:

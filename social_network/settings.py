@@ -172,3 +172,6 @@ EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 # https://warehouse.python.org/project/whitenoise/
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+STRIPE_SECRET_KEY = 'sk_test_51IZDYFCYGC6TXNzTjCvWWynsETsB6Gl7DnhRMU3KcSbDljryyS5Ht5FzzU522tIK9kOFgTRi9hVaeHotD0zEVo7b00ofYTBuJl'
+STRIPE_PUBLISHABLE_KEY = 'pk_test_51IZDYFCYGC6TXNzTfspaRvU3eMlsbeOJ8kWuVd9gPPnbFTV7kNcpxJmsMzIm4xdvNTlMpMnWUtq2MMqu9lUiIuxL00SMKsmapg'

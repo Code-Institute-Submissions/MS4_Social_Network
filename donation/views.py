@@ -4,4 +4,4 @@ from django.views.generic.base import TemplateView
 
 
 class DonationView(TemplateView):
-    template_name = 'dontaion.html'
+    template_name = 'donation.html'
