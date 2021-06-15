@@ -28,7 +28,7 @@
         </div>
         <!-- shows the post -->
         {% for post in post_list %}
-        <div class="row justify-content-center mb-3">
+        <div class="row justify-content-center mb-3 mt-3">
             <div class="col-md-8 col-sm-8 position-relative card shadow rounded">
                 <div class="py-3 card-body">
                     <a href="{% url 'profile' post.author.profile.pk %}">
@@ -37,9 +37,20 @@
                     <p class="post-text">
                         <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
                         <h5> {{ post.author }}</h5></a>
-                        <p class="border-bottom">{{ post.created_on }}</p>
+                        <p>{{ post.created_on }}</p>
                         </a>
                     </p>
+                    {% if request.user == post.author %}
+                    <div class="btn-group">
+                        <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                            <a href="{% url 'post-edit' post.pk %}" class="edit-color"><i class="far fa-edit">Edit</i></a>
+                            <a href="{% url 'post-delete' post.pk %}" class="edit-color"><i class="fas fa-trash">Delete</i></a>
+                        </ul>
+                    </div>
+                    {% endif %}
                 </div>
                     
                 <div class="position-relative ms-3 post-body-text">
