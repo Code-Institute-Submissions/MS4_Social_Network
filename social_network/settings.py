@@ -193,7 +193,3 @@ LOGIN_REDIRECT_URL = 'post-list'
 ACCOUNT_EMAIL_REQUIRED = True
 # Send emails to the terminal
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# Simplified static file serving.
-# https://warehouse.python.org/project/whitenoise/
-
