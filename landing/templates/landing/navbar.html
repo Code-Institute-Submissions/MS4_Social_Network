@@ -20,9 +20,6 @@
         <div class="input-group">
         <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
         <input type="text" class="form-control" placeholder="Search for developer" aria-label="Username" aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
-        <button class="remove-default-btn" type="submit">
-            
-        </button>
     </div>
       </form>
       {% if user.is_authenticated %}
@@ -34,6 +31,9 @@
         </ul>
       </div>
       {% endif %}
+      <div class="donatBtn">
+        <a type="button" class="btn btn-outline-primary">Donation <i class="far fa-money-bill-alt"></i></a>
+      </div>
     </div>
   </div>
 </nav>

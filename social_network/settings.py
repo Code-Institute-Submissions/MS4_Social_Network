@@ -44,6 +44,7 @@ AUTHENTICATION_BACKENDS = [
 INSTALLED_APPS = [
     'social',
     'landing',
+    'donation',
 
     'crispy_forms',
     'django.contrib.admin',
