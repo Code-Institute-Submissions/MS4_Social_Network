@@ -1,9 +1,10 @@
 {% extends 'landing/base.html' %}
+{% load static %}
 
 {% block content %}
     
     <div class="index-container">
-        <img class="landing-img" src="/media/uploads/post_photos/cyber.jpg" alt="">
+        <img class="landing-img" src="{{ MEDIA_URL }}uploads/post_photos/cyber.jpg" alt="">
         <div class="row justify-content-center mt-5 index-text">
             <div class="col-md-10 col-sm-8 text-center">
                 <h1 class="display-2">Connect With Other Developers!</h1>

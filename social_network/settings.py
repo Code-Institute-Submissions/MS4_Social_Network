@@ -42,13 +42,6 @@ AUTHENTICATION_BACKENDS = [
 ]
 
 INSTALLED_APPS = [
-    'social',
-    'landing',
-    'donation',
-
-    'crispy_forms',
-    'storages',
-
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -59,6 +52,13 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
+
+    'social',
+    'landing',
+    'donation',
+
+    'crispy_forms',
+    'storages',
 ]
 
 SITE_ID = 1
@@ -87,6 +87,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'django.template.context_processors.media',
             ],
         },
     },
@@ -164,7 +165,7 @@ if 'USE_AWS' in os.environ:
 
     # Bucket Config
     AWS_STORAGE_BUCKET_NAME = 'social-media-ms4'
-    AWS_S3_REGION_NAME = 'EU (Stockholm) eu-north-1'
+    AWS_S3_REGION_NAME = 'eu-north-1'
     AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
     AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
