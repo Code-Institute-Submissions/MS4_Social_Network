@@ -3,13 +3,13 @@
 
 {% block content %}
     <div class="container">
-        <!-- Gets back to feed -->
+        <!-- Gets back to post -->
         <div class="row mt-5">
             <div class="col-md-5 col-sm-6">
                 <a href="{% url 'post-detail' object.pk %}" class="btn btn-light">Back to Post</a>
             </div>
         </div>
-        <!-- adds the post -->
+        <!-- check if user wan't to remove post -->
         <div class="row justify-content-center mt-3 mb-5">
             <div class="col-md-5 col-sm-12 border-bottom">
                 <form method="Post">

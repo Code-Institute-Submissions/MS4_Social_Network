@@ -2,12 +2,13 @@
 
 {% block content %}
     <div class="container">
-        <!-- Add post header -->
+        <!-- Gets back to Profile -->
         <div class="row mt-5">
             <div class="col-md-3 col-sm-6">
                 <a href="{% url 'profile' profile.pk %}" class="btn btn-light">Back To Profile</a>
             </div>
         </div>
+        <!-- check followers -->
         <div class="row justify-content-center mt-3">
             <div class="col-md-5 col-sm-12">
                 {% if profile.name %}
@@ -17,7 +18,7 @@
                 {% endif %}
             </div>
         </div>
-
+        <!-- List followers -->
         {% for follower in followers %}
         <div class="row justify-content-center">
             <div class="col-md-5 col-sm-12 position-relative my-3">

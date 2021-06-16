@@ -13,7 +13,6 @@
     <!-- Shows the post -->
     <div class="row justify-content-center mt-3">
         <div class="col-md-8 col-sm-8 position-relative card shadow rounded">
-            <!-- If the user that created post give them oppertunity to delete and edit post -->
                 <div class="py-3 card-body">
                     <a href="{% url 'profile' post.author.profile.pk %}">
                         <img class="rounded-circle post-img" height="60" width="60" src="{{ post.author.profile.picture.url }}">
@@ -24,6 +23,7 @@
                         <p class="border-bottom">{{ post.created_on }}</p>
                         </a>
                     </p>
+                    <!-- If the user that created post give them oppertunity to delete and edit post -->
                     {% if request.user == post.author %}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
@@ -36,7 +36,7 @@
                     </div>
                     {% endif %}
                 </div>
-
+                <!-- if theres a img show otherwise only show post -->
                 <div class="position-relative ms-3 post-body-text">
                     {% if post.image %}
                         <img src="{{ post.image.url }}" class="post-image border-bottom">
@@ -44,7 +44,7 @@
                     <p class="border-bottom">{{ post.body }}</p>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                 </div>
-
+                <!-- Show post likes and dislikes -->
             <div class="d-flex flex-row">
                 <form method="POST" action="{% url 'like' post.pk %}">
                     {% csrf_token %}
@@ -61,16 +61,10 @@
                         <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
                     </button>
                 </form>
-                <div class="justify-content-end">
-                    {% if request.user == post.author %}
-                        <a href="{% url 'post-edit' post.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
-                        <a href="{% url 'post-delete' post.pk %}" class="edit-color"><i class="fas fa-trash"></i></a>
-                    {% endif %}
-                </div>
             </div>
         </div>
     </div>
-
+    <!-- Add comment -->
     <div class="row justify-content-center mt-3">
         <div class="col-md-5 col-sm-12">
             <h5>Add a Comment!</h5>
@@ -87,6 +81,7 @@
             </form>
         </div>
     </div>
+    <!-- List comments -->
     {% for comment in comments %}
     {% if comment.is_parent %}
     <div class="row justify-content-center mt-3 mb-5 border-bottom">
@@ -102,12 +97,14 @@
                         </a>
                     </p>
                 </div>
+                <!-- if user is author of comment give them ability to edit and delete the comment -->
                 {% if request.user == comment.author %}
                 <a href="{% url 'comment-edit' post.pk comment.pk %}" class="edit-color"><i class="fas fa-edit"></i></a>
                 <a href="{% url 'comment-delete' post.pk comment.pk %}" class="edit-color"><i class="fas fa-trash"></i></a>
                 {% endif %}
             </p>
             <p>{{ comment.comment }}</p>
+            <!-- Show comments likes and dislikes -->
             <div class="d-flex flex-row">
                 <form method="POST" action="{% url 'comment-like' post.pk comment.pk %}">
                     {% csrf_token %}
@@ -132,6 +129,7 @@
             </div>
         </div>
     </div>
+    <!-- comment on comments -->
     <div class="row justify-content-center mt-3 mb-5 d-none" id="{{ comment.pk }}">
         <div class="col-md-5 col-sm-12">
             <form method="POST" action="{% url 'comment-reply' post.pk comment.pk %}">
@@ -143,7 +141,7 @@
             </form>
         </div>
     </div>
-
+    <!-- List comments on comments -->
     {% for child_comment in comment.children %}
         <div class="row justify-content-center mt-3 mb-5 child-comment">
             <div class="col-md-5 col-sm-12 border-bottom">
@@ -156,6 +154,7 @@
                             <a class="text-primary post-link" href="{% url 'profile' child_comment.author.profile.pk %}">@{{ child_comment.author }}</a> {{ child_comment.created_on }}
                         </p>
                     </div>
+                    <!-- if user is author of comment give them ability to delete the comment -->
                     {% if request.user == child_comment.author %}
                         <a href="{% url 'comment-delete' post.pk child_comment.pk %}" class="edit-color"><i class="fas fa-trash"></i></a>
                     {% endif %}

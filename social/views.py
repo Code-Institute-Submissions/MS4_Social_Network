@@ -9,11 +9,15 @@ from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
 
 
+# View for Post List
 class PostListView(LoginRequiredMixin, View):
     def get(self, request, *args, **kwargs):
+        """
+        Check if user logged in, then show post from other users that the current user logged in follows
+        """
         logged_in_user = request.user
         posts = Post.objects.filter(
-            author__profile__followers__in=[logged_in_user.id]    
+            author__profile__followers__in=[logged_in_user.id]   
         ).order_by('-created_on')
         form = PostForm()
 
@@ -26,7 +30,7 @@ class PostListView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         logged_in_user = request.user
         posts = Post.objects.filter(
-            author__profile__followers__in=[logged_in_user.id]    
+            author__profile__followers__in=[logged_in_user.id]   
         ).order_by('-created_on')
         form = PostForm(request.POST, request.FILES)
 
@@ -42,8 +46,12 @@ class PostListView(LoginRequiredMixin, View):
         return render(request, 'social/post_list.html', context)
 
 
+# Post detail view, show a specific post only
 class PostDetailView(LoginRequiredMixin, View):
     def get(self, request, pk, *args, **kwargs):
+        """
+        Shows a specific post with comments
+        """
         post = Post.objects.get(pk=pk)
         form = CommentForm()
         comments = Comment.objects.filter(post=post).order_by('-created_on')
@@ -57,6 +65,9 @@ class PostDetailView(LoginRequiredMixin, View):
         return render(request, 'social/post_detail.html', context)
 
     def post(self, request, pk, *args, **kwargs):
+        """
+        Post new comment
+        """
         post = Post.objects.get(pk=pk)
         form = CommentForm(request.POST)
 
@@ -77,12 +88,15 @@ class PostDetailView(LoginRequiredMixin, View):
         return render(request, 'social/post_detail.html', context)
 
 
+# Function for reply on comments
 class CommentReplyView(LoginRequiredMixin, View):
     def post(self, request, post_pk, pk, *args, **kwargs):
         post = Post.objects.get(pk=post_pk)
         parent_comment = Comment.objects.get(pk=pk)
         form = CommentForm(request.POST)
-
+        """
+        If form valid post comment
+        """
         if form.is_valid():
             new_comment = form.save(commit=False)
             new_comment.author = request.user
@@ -158,7 +172,9 @@ class ProfileView(View):
         profile = UserProfile.objects.get(pk=pk)
         user = profile.user
         posts = Post.objects.filter(author=user).order_by('-created_on')
-
+        """
+        Show followers
+        """
         followers = profile.followers.all()
 
         if len(followers) == 0:
@@ -200,6 +216,7 @@ class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
         return self.request.user == profile.user
 
 
+# Function for user to add followers
 class AddFollower(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         profile = UserProfile.objects.get(pk=pk)
@@ -208,6 +225,7 @@ class AddFollower(LoginRequiredMixin, View):
         return redirect('profile', pk=profile.pk)
 
 
+# Function for user to remove followers
 class RemoveFollower(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         profile = UserProfile.objects.get(pk=pk)
@@ -216,12 +234,15 @@ class RemoveFollower(LoginRequiredMixin, View):
         return redirect('profile', pk=profile.pk)
 
 
+# Function for user to like
 class AddLike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
 
         is_dislike = False
-
+        """
+        if else statement to check if user already liked the post
+        """
         for dislike in post.dislikes.all():
             if dislike == request.user:
                 is_dislike = True
@@ -247,13 +268,15 @@ class AddLike(LoginRequiredMixin, View):
         return HttpResponseRedirect(next)
 
 
-
+# Function for user to dislike
 class Dislike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
 
         is_like = False
-
+        """
+        if else statement to check if user already disliked the post
+        """
         for like in post.likes.all():
             if like == request.user:
                 is_like = True
@@ -279,12 +302,15 @@ class Dislike(LoginRequiredMixin, View):
         return HttpResponseRedirect(next)
 
 
+# Function for user to like a comment
 class AddCommentLike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         comment = Comment.objects.get(pk=pk)
 
         is_dislike = False
-
+        """
+        if else statement to check if user already liked the post
+        """
         for dislike in comment.dislikes.all():
             if dislike == request.user:
                 is_dislike = True
@@ -310,12 +336,15 @@ class AddCommentLike(LoginRequiredMixin, View):
         return HttpResponseRedirect(next)
 
 
+# Function for user to dislike a comment
 class AddCommentDislike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         comment = Comment.objects.get(pk=pk)
 
         is_like = False
-
+        """
+        if else statement to check if user already disliked the post
+        """
         for like in comment.likes.all():
             if like == request.user:
                 is_like = True
@@ -341,7 +370,7 @@ class AddCommentDislike(LoginRequiredMixin, View):
         return HttpResponseRedirect(next)
 
 
-
+# Function for user to search for other users
 class UserSearch(View):
     def get(self, request, *args, **kwargs):
         query = self.request.GET.get('query')
@@ -356,6 +385,7 @@ class UserSearch(View):
         return render(request, 'social/search.html', context)
 
 
+# Function to list followers and profile
 class ListFollowers(View):
     def get(self, request, pk, *args, **kwargs):
         profile = UserProfile.objects.get(pk=pk)

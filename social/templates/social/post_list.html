@@ -4,7 +4,7 @@
 
 {% block content %}
     <div class="container">
-        <!-- Add post header -->
+        <!-- Header -->
         <div class="post-container">
         <div class="row justify-content-center mt-3">
             <div class="col-md-5 col-sm-12 text-center">
@@ -40,6 +40,7 @@
                         <p>{{ post.created_on }}</p>
                         </a>
                     </p>
+                    <!-- if user is author of post give them ability to edit and delete the post -->
                     {% if request.user == post.author %}
                     <div class="btn-group">
                         <button class="btn btn-secondary dropdown-toggle float-right" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
@@ -52,7 +53,7 @@
                     </div>
                     {% endif %}
                 </div>
-                    
+                <!-- if theres a img show otherwise only show post -->
                 <div class="position-relative ms-3 post-body-text">
                     {% if post.image %}
                         <img src="{{ post.image.url }}" class="post-image border-bottom">
@@ -60,6 +61,7 @@
                     <p class="border-bottom">{{ post.body }}</p>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
                 </div>
+                <!-- Show post likes and dislikes -->
                 <div class="d-flex flex-row">
                     <form method="POST" action="{% url 'like' post.pk %}">
                         {% csrf_token %}

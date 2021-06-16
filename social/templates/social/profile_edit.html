@@ -4,19 +4,19 @@
 
 {% block content %}
     <div class="container">
-        <!-- Gets back to feed -->
+        <!-- Gets back to profile -->
         <div class="row mt-5">
             <div class="col-md-5 col-sm-6">
                 <a href="{% url 'profile' object.pk %}" class="btn btn-light">Back to Profile</a>
             </div>
         </div>
-        <!-- Add post header -->
+        <!-- Header -->
         <div class="row justify-content-center mt-3">
             <div class="col-md-5 col-sm-12 border-bottom text-center">
                 <h5>Update Your Profile!</h5>
             </div>
         </div>
-        <!-- adds the post -->
+        <!-- Updates the profile -->
         <div class="row justify-content-center mt-3 mb-5">
             <div class="col-md-5 col-sm-12 border-bottom">
                 <form method="POST" enctype="multipart/form-data">

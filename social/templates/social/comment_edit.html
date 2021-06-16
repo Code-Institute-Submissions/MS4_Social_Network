@@ -4,19 +4,19 @@
 
 {% block content %}
     <div class="container">
-        <!-- Gets back to feed -->
+        <!-- Gets back to post -->
         <div class="row mt-5">
             <div class="col-md-5 col-sm-6">
                 <a href="{% url 'post-detail' object.pk %}" class="btn btn-light">Back to Post</a>
             </div>
         </div>
-        <!-- Add post header -->
+        <!-- Header -->
         <div class="row justify-content-center mt-3">
             <div class="col-md-5 col-sm-12 border-bottom text-center">
                 <h5>Update Your Comment!</h5>
             </div>
         </div>
-        <!-- adds the post -->
+        <!-- Update comment -->
         <div class="row justify-content-center mt-3 mb-5">
             <div class="col-md-5 col-sm-12 border-bottom">
                 <form method="POST">
@@ -24,7 +24,7 @@
                     {{ form | crispy }}
                     <div class="d-grid gap-2">
                         <button class="btn btn-success mt-3">
-                            Post
+                            Update
                         </button>
                     </div>
                 </form>

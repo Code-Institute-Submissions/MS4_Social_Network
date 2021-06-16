@@ -25,11 +25,11 @@ class Comment(models.Model):
     dislikes = models.ManyToManyField(User, blank=True, related_name='comment_dislikes')
     parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
 
-    @property # Decorator to make it more easely to access this function
+    @property  # Decorator to make it more easely to access this function
     def children(self):
         return Comment.objects.filter(parent=self).order_by('-created_on').all()
 
-    @property # check if is parent
+    @property  # check if is parent
     def is_parent(self):
         if self.parent is None:
             return True
@@ -47,11 +47,14 @@ class UserProfile(models.Model):
     followers = models.ManyToManyField(User, blank=True, related_name='followers')
 
 
+# Create user profile
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         UserProfile.objects.create(user=instance)
 
+
+# Save user profile
 @receiver(post_save, sender=User)
 def save_user_profile(sender, instance, **kwargs):
     instance.profile.save()
