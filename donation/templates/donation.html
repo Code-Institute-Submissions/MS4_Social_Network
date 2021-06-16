@@ -35,7 +35,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Donate 10Eu</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" id="open-popup-1" class="btn btn-primary">Donate</a>
+                    <a href="#" id="" class="btn btn-primary">Donate</a>
                 </div>
             </div>
         </div>
@@ -45,7 +45,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Donate 20Eu</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" id="open-popup-1" class="btn btn-primary">Donate</a>
+                    <a href="#" id="" class="btn btn-primary">Donate</a>
                 </div>
             </div>
         </div>
@@ -55,7 +55,7 @@
                 <div class="card-body">
                     <h5 class="card-title">Donate other amount</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                    <a href="#" id="open-popup-1" class="btn btn-primary">Donate</a>
+                    <a href="#" id="" class="btn btn-primary">Donate</a>
                 </div>
             </div>
         </div>
@@ -127,7 +127,33 @@
         </div>
     </div>
 </div>
+<script>
 
+    var popup1 = document.getElementById("popup-1")
+    var openPopup1 = document.getElementById("open-popup-1")
+    var closePopup1 = document.getElementById('close-popup-1')
+
+    openPopup1.addEventListener('click', () => {
+        popup1.style.display = "block";
+    })
+
+    closePopup1.addEventListener('click', () => {
+        popup1.style.display = "none";
+    })
+
+    var popup2 = document.getElementById("popup-2")
+    var openPopup2 = document.getElementById("open-popup-2")
+    var closePopup2 = document.getElementById('close-popup-2')
+
+    openPopup2.addEventListener('click', () => {
+        popup2.style.display = "block";
+    })
+
+    closePopup2.addEventListener('click', () => {
+        popup2.style.display = "none";
+    })
+
+</script>
 
 
 
