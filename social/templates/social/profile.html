@@ -1,125 +1,124 @@
 {% extends 'landing/base.html' %}
 
 {% block content %}
-    <div class="container">
-        <!-- Gets back to feed -->
-        <div class="row mt-5">
-            <div class="col-md-3 col-sm-6 text-center">
-                <a href="{% url 'post-list' %}" class="btn btn-light">Back To Feed</a>
+<div class="container">
+    <div class="row justify-content-center text-center mt-5">
+        <div class="card shadow col-md-8 col-sm-8 pt-3 border-bottom">
+            <img src="{{ profile.picture.url }}" id="profile-img" class="rounded-circle" width="300" height="300">
+            <!-- Check if user have a profile name then display this otherwise display username -->
+            {% if profile.name %}
+            <h3 class="py-2">{{ profile.name }}
+                <span>
+                    <!-- If user == user logged in give user ability to edit profile page -->
+                    {% if request.user == user %}
+                    <a href="{% url 'profile-edit' profile.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
+                    {% endif %}
+                </span>
+                {% else %}
+                <h3 class="py-2">{{ user.username }}</h3>
+                <span>
+                    <!-- If user == user logged in give user ability to edit profile page -->
+                    {% if request.user == user %}
+                    <a href="{% url 'profile-edit' profile.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
+                    {% endif %}
+                </span>
+                {% endif %}
+            </h3>
+            <!-- If user adds location == show -->
+            {% if profile.location %}
+            <p class="py-2">{{ profile.location }}</p>
+            {% endif %}
+            <!-- If user adds birth_date == show -->
+            {% if profile.birth_date %}
+            <p class="py-2">{{ profile.birth_date }}</p>
+            {% endif %}
+            <!-- If user adds bio == show -->
+            {% if profile.bio %}
+            <p class="py-2">{{ profile.bio }}</p>
+            {% endif %}
+            <!-- Give other users the ability to follow the specific user -->
+            <div class="mb-3">
+                <a href="{% url 'list-followers' profile.pk %}" class="post-link">Followers:
+                    {{ number_of_followers }}</a>
+                {% if user == request.user %}
+                {% else %}
+                <!-- If user already follows give them ability to unfollow -->
+                {% if is_following %}
+                <form method="POST" action="{% url 'remove-follower' profile.pk %}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-danger" type="submit">Unfollow</button>
+                </form>
+                <!-- If user doesn't follows give them ability to follow -->
+                {% else %}
+                <form method="POST" action="{% url 'add-follower' profile.pk %}">
+                    {% csrf_token %}
+                    <button class="btn btn-outline-success" type="submit">Follow</button>
+                </form>
+                {% endif %}
+                {% endif %}
             </div>
         </div>
-        <div class="row justify-content-center text-center mt-5">
-            <div class="card shadow col-md-8 col-sm-8 pt-3 border-bottom">
-                <img src="{{ profile.picture.url }}" id="profile-img" class="rounded-circle" width="300" height="300">
-                    <!-- Check if user have a profile name then display this otherwise display username -->
-                    {% if profile.name %}
-                        <h3 class="py-2">{{ profile.name }}
-                        <span>
-                            <!-- If user == user logged in give user ability to edit profile page -->
-                            {% if request.user == user %}
-                                <a href="{% url 'profile-edit' profile.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
-                            {% endif %}
-                        </span>
-                    {% else %}
-                        <h3 class="py-2">{{ user.username }}</h3>
-                            <span>
-                                <!-- If user == user logged in give user ability to edit profile page -->
-                                {% if request.user == user %}
-                                    <a href="{% url 'profile-edit' profile.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
-                                {% endif %}
-                            </span>
-                    {% endif %}
-                </h3>
-                <!-- If user adds location == show -->
-                {% if profile.location %}
-                <p class="py-2">{{ profile.location }}</p>
-                {% endif %}
-                <!-- If user adds birth_date == show -->
-                {% if profile.birth_date %}
-                <p class="py-2">{{ profile.birth_date }}</p>
-                {% endif %}
-                <!-- If user adds bio == show -->
-                {% if profile.bio %}
-                <p class="py-2">{{ profile.bio }}</p>
-                {% endif %}
-                <!-- Give other users the ability to follow the specific user -->
-                <div class="mb-3">
-                    <a href="{% url 'list-followers' profile.pk %}" class="post-link">Followers: {{ number_of_followers }}</a>
-                    {% if user == request.user %}
-                    {% else %}
-                    <!-- If user already follows give them ability to unfollow -->
-                    {% if is_following %}
-                    <form method="POST" action="{% url 'remove-follower' profile.pk %}">
-                        {% csrf_token %}
-                        <button class="btn btn-outline-danger" type="submit">Unfollow</button>
-                    </form>
-                    <!-- If user doesn't follows give them ability to follow -->
-                    {% else %}
-                    <form method="POST" action="{% url 'add-follower' profile.pk %}">
-                        {% csrf_token %}
-                        <button class="btn btn-outline-success" type="submit">Follow</button>
-                    </form>
-                    {% endif %}
-                    {% endif %}
-                </div>
-            </div>
-        </div>
-        <!-- shows the post -->
-        {% for post in posts %}
-        <div class="row justify-content-center mb-3">
-            <div class="col-md-8 col-sm-8 card shadow rounded">
-                <div class="py-3 card-body">
-                    <a href="{% url 'profile' post.author.profile.pk %}">
-                        <img class="rounded-circle post-img" height="60" width="60" src="{{ post.author.profile.picture.url }}">
-                    </a>
-                    <p class="post-text">
-                        <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
-                        <h5> {{ post.author }}</h5></a>
-                        <p class="border-bottom">{{ post.created_on }}</p>
-                        </a>
-                    </p>
-                    <!-- If the user that created post give them oppertunity to delete and edit post -->
-                    {% if request.user == post.author %}
-                    <div class="btn-group">
-                        <button class="btn btn-secondary dropdown-toggle" type="button" id="defaultDropdown" data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
-                        <i class="fas fa-ellipsis-h"></i>
-                        </button>
-                        <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
-                            <a href="{% url 'post-edit' post.pk %}" class="edit-color"><i class="far fa-edit">Edit</i></a>
-                            <a href="{% url 'post-delete' post.pk %}" class="edit-color"><i class="fas fa-trash">Delete</i></a>
-                        </ul>
-                    </div>
-                    {% endif %}
-                </div>
-                    
-                <div class="position-relative ms-3 post-body-text">
-                    <!-- if theres a img show otherwise only show post -->
-                    {% if post.image %}
-                        <img src="{{ post.image.url }}" class="post-image border-bottom">
-                    {% endif %}
-                    <p class="border-bottom">{{ post.body }}</p>
-                    <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
-                </div>
-                <!-- Show post likes and dislikes -->
-                <div class="d-flex flex-row">
-                    <form method="POST" action="{% url 'like' post.pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ request.path }}">
-                        <button class="remove-default-btn" type="submit">
-                            <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
-                        </button>
-                    </form>
-
-                    <form method="POST" action="{% url 'dislike' post.pk %}">
-                        {% csrf_token %}
-                        <input type="hidden" name="next" value="{{ request.path }}">
-                        <button class="remove-default-btn" type="submit">
-                            <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
-                        </button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        {% endfor %}
     </div>
+    <!-- shows the post -->
+    {% for post in posts %}
+    <div class="row justify-content-center mb-3">
+        <div class="col-md-8 col-sm-8 card shadow rounded">
+            <div class="py-3 card-body">
+                <a href="{% url 'profile' post.author.profile.pk %}">
+                    <img class="rounded-circle post-img" height="60" width="60"
+                        src="{{ post.author.profile.picture.url }}">
+                </a>
+                <p class="post-text">
+                    <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
+                        <h5> {{ post.author }}</h5>
+                    </a>
+                    <p class="border-bottom">{{ post.created_on }}</p>
+                    </a>
+                </p>
+                <!-- If the user that created post give them oppertunity to delete and edit post -->
+                {% if request.user == post.author %}
+                <div class="btn-group">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="defaultDropdown"
+                        data-bs-toggle="dropdown" data-bs-auto-close="true" aria-expanded="false">
+                        <i class="fas fa-ellipsis-h"></i>
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="defaultDropdown">
+                        <a href="{% url 'post-edit' post.pk %}" class="edit-color"><i class="far fa-edit">Edit</i></a>
+                        <a href="{% url 'post-delete' post.pk %}" class="edit-color"><i
+                                class="fas fa-trash">Delete</i></a>
+                    </ul>
+                </div>
+                {% endif %}
+            </div>
+
+            <div class="position-relative ms-3 post-body-text">
+                <!-- if theres a img show otherwise only show post -->
+                {% if post.image %}
+                <img src="{{ post.image.url }}" class="post-image border-bottom">
+                {% endif %}
+                <p class="border-bottom">{{ post.body }}</p>
+                <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
+            </div>
+            <!-- Show post likes and dislikes -->
+            <div class="d-flex flex-row">
+                <form method="POST" action="{% url 'like' post.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="remove-default-btn" type="submit">
+                        <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
+                    </button>
+                </form>
+
+                <form method="POST" action="{% url 'dislike' post.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{ request.path }}">
+                    <button class="remove-default-btn" type="submit">
+                        <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
 {% endblock content %}

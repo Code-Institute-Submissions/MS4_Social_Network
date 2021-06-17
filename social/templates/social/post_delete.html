@@ -3,12 +3,6 @@
 
 {% block content %}
     <div class="container">
-        <!-- Gets back to post -->
-        <div class="row mt-5">
-            <div class="col-md-5 col-sm-6">
-                <a href="{% url 'post-detail' object.pk %}" class="btn btn-light">Back to Post</a>
-            </div>
-        </div>
         <!-- check if user wan't to remove post -->
         <div class="row justify-content-center mt-3 mb-5">
             <div class="col-md-5 col-sm-12 border-bottom">
@@ -19,6 +13,9 @@
                     <div class="d-grid gap-2">
                         <button class="btn btn-danger mt-3">
                             Delete
+                        </button>
+                        <button class="btn btn-primary mt-3">
+                            Back
                         </button>
                     </div>
                 </form>

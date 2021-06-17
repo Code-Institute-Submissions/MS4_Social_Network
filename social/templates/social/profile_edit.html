@@ -4,12 +4,7 @@
 
 {% block content %}
     <div class="container">
-        <!-- Gets back to profile -->
-        <div class="row mt-5">
-            <div class="col-md-5 col-sm-6">
-                <a href="{% url 'profile' object.pk %}" class="btn btn-light">Back to Profile</a>
-            </div>
-        </div>
+
         <!-- Header -->
         <div class="row justify-content-center mt-3">
             <div class="col-md-5 col-sm-12 border-bottom text-center">
@@ -25,6 +20,9 @@
                     <div class="d-grid gap-2">
                         <button class="btn btn-success mt-3">
                             Update!
+                        </button>
+                        <button class="btn btn-primary mt-3">
+                            Back
                         </button>
                     </div>
                 </form>

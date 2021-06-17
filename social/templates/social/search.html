@@ -3,12 +3,6 @@
 {% block content %}
 
     <div class="container">
-        <!-- Gets back to feed -->
-        <div class="row mt-5">
-            <div class="col-md-3 col-sm-6">
-                <a href="{% url 'post-list' %}" class="btn btn-light">Back to Feed</a>
-            </div>
-        </div>
         <!-- List profiles on search -->
         {% for profile in profile_list %}
             <div class="row justify-content-center mt-3">

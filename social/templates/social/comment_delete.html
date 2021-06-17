@@ -5,7 +5,10 @@
         <!-- Gets back to post -->
         <div class="row mt-5">
             <div class="col-md-5 col-sm-6">
-                <a href="{% url 'post-detail' object.post.pk %}" class="btn btn-light">Back to Post</a>
+                <a href="{% url 'post-detail' object.post.pk %}" class="btn btn-primary">
+                    <i class="fas fa-chevron-left"></i>
+                    Back to Post
+                </a>
             </div>
         </div>
         <!-- form to check if user wan't to remove comment -->
@@ -18,6 +21,9 @@
                     <div class="d-grid gap-2">
                         <button class="btn btn-danger mt-3">
                             Delete
+                        </button>
+                        <button class="btn btn-danger mt-3">
+                            Back
                         </button>
                     </div>
                 </form>
