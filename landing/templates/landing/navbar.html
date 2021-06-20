@@ -11,26 +11,36 @@
             {% if user.is_authenticated %}
             <ul class="nav nav-tabs">
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'post-list' %}">
-                        <i class="fas fa-home m-4"></i>
-                    </a>
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Feed">
+                        <a class="nav-link" href="{% url 'post-list' %}">
+                            <i class="fas fa-home m-4"></i>
+                        </a>
+                    </span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'profile' request.user.profile.pk %}">
-                        <i class="fas fa-user m-4"></i>
-                    </a>
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Profile">
+                        <a class="nav-link" href="{% url 'profile' request.user.profile.pk %}">
+                            <i class="fas fa-user m-4"></i>
+                        </a>
+                    </span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'donation' %}">
-                        <i class="fas fa-hand-holding-usd m-4"></i>
-                    </a>
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Donation">
+                        <a class="nav-link" href="{% url 'donation' %}">
+                            <i class="fas fa-hand-holding-usd m-4"></i>
+                        </a>
+                    </span>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{% url 'account_logout' %}">
-                        <i class="fas fa-sign-out-alt m-4"></i>
-                    </a>
+                    <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Sign Out">
+                        <a class="nav-link" href="{% url 'account_logout' %}">
+                            <i class="fas fa-sign-out-alt m-4"></i>
+                        </a>
+                    </span>
                 </li>
             </ul>
+
+
 
             {% endif %}
             <form class="d-flex" method="GET" action="{% url 'profile-search' %}">
