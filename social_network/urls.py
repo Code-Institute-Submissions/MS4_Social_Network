@@ -25,3 +25,4 @@ urlpatterns = [
     path('social/', include('social.urls')),
     path('', include('donation.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+

@@ -4,14 +4,16 @@
 <div class="container">
     <div class="row justify-content-center text-center mt-5">
         <div class="card shadow col-md-8 col-sm-8 pt-3 border-bottom">
-            <img src="{{ profile.picture.url }}" id="profile-img" class="rounded-circle" width="300" height="300">
+            <img src="{{ profile.picture.url }}" id="profile-img" class="rounded-circle text-center" width="300" height="300">
             <!-- Check if user have a profile name then display this otherwise display username -->
             {% if profile.name %}
             <h3 class="py-2">{{ profile.name }}
                 <span>
                     <!-- If user == user logged in give user ability to edit profile page -->
                     {% if request.user == user %}
-                    <a href="{% url 'profile-edit' profile.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
+                    <a href="{% url 'profile-edit' profile.pk %}" class="edit-color">
+                        <i class="far fa-edit"></i>
+                    </a>
                     {% endif %}
                 </span>
                 {% else %}
@@ -19,22 +21,27 @@
                 <span>
                     <!-- If user == user logged in give user ability to edit profile page -->
                     {% if request.user == user %}
-                    <a href="{% url 'profile-edit' profile.pk %}" class="edit-color"><i class="far fa-edit"></i></a>
+                    <a href="{% url 'profile-edit' profile.pk %}" class="edit-color">
+                        <i class="far fa-edit"></i>
+                    </a>
                     {% endif %}
                 </span>
                 {% endif %}
             </h3>
             <!-- If user adds location == show -->
             {% if profile.location %}
-            <p class="py-2">{{ profile.location }}</p>
+            <i class="fas fa-map-marker-alt"></i>
+            <p class="py-2">Live in <strong>{{ profile.location }}</strong></p>
             {% endif %}
             <!-- If user adds birth_date == show -->
             {% if profile.birth_date %}
-            <p class="py-2">{{ profile.birth_date }}</p>
+            <i class="fas fa-birthday-cake"></i>
+            <p class="py-2">Birth <strong>{{ profile.birth_date }}</strong></p>
             {% endif %}
             <!-- If user adds bio == show -->
             {% if profile.bio %}
-            <p class="py-2">{{ profile.bio }}</p>
+            <i class="fas fa-address-card"></i>
+            <p class="py-2"><strong>{{ profile.bio }}</strong></p>
             {% endif %}
             <!-- Give other users the ability to follow the specific user -->
             <div class="mb-3">
