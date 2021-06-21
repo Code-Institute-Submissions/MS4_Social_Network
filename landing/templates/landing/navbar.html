@@ -5,44 +5,41 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="" {% if user.is_authenticated %} href="{% url 'post-list' %}" {% else %}
                 href="{% url 'index' %}" {% endif %}>
-                <img src="{{ MEDIA_URL }}uploads/post_photos/connection.png" alt="" width="100" height="96">
+                <img src="{{ MEDIA_URL }}uploads/post_photos/social.png" alt="" width="100" height="96">
                 SocialNetwork
             </a>
             {% if user.is_authenticated %}
             <ul class="nav nav-tabs">
                 <li class="nav-item">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Feed">
-                        <a class="nav-link" href="{% url 'post-list' %}">
-                            <i class="fas fa-home m-4"></i>
+                        <a class="nav-link m-4" href="{% url 'post-list' %}">
+                            <img src="{{ MEDIA_URL }}uploads/post_photos/home.png" alt="" width="40" height="40">
                         </a>
                     </span>
                 </li>
                 <li class="nav-item">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Profile">
-                        <a class="nav-link" href="{% url 'profile' request.user.profile.pk %}">
-                            <i class="fas fa-user m-4"></i>
+                        <a class="nav-link m-4" href="{% url 'profile' request.user.profile.pk %}">
+                            <img src="{{ MEDIA_URL }}uploads/post_photos/user.png" alt="" width="40" height="40">
                         </a>
                     </span>
                 </li>
                 <li class="nav-item">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Donation">
-                        <a class="nav-link" href="{% url 'donation' %}">
-                            <i class="fas fa-hand-holding-usd m-4"></i>
+                        <a class="nav-link m-4" href="{% url 'donation' %}">
+                            <img src="{{ MEDIA_URL }}uploads/post_photos/donation.png" alt="" width="40" height="40">
                         </a>
                     </span>
                 </li>
                 <li class="nav-item">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus" data-bs-content="Sign Out">
-                        <a class="nav-link" href="{% url 'account_logout' %}">
-                            <i class="fas fa-sign-out-alt m-4"></i>
+                        <a class="nav-link m-4" href="{% url 'account_logout' %}">
+                            <img src="{{ MEDIA_URL }}uploads/post_photos/log-out.png" alt="" width="40" height="40">
                         </a>
                     </span>
                 </li>
             </ul>
 
-
-
-            {% endif %}
             <form class="d-flex" method="GET" action="{% url 'profile-search' %}">
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
@@ -50,6 +47,7 @@
                         aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
                 </div>
             </form>
+            {% endif %}
         </div>
     </nav>
 </div>
