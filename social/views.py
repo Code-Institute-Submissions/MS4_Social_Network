@@ -12,7 +12,7 @@ from .forms import PostForm, CommentForm
 # View for Post List
 class PostListView(LoginRequiredMixin, View):
 
-    def get_default_context(request) -> dict:
+    def get_default_context(self, request) -> dict:
         posts = Post.objects.filter(
             author__profile__followers__in=[request.user.id]   
         ).order_by('-created_on') 
@@ -87,7 +87,6 @@ class CommentReplyView(LoginRequiredMixin, View):
         """
         Here you describe the function 
         on multiple lines
-
         request: Request
         post_pk: int
         ...

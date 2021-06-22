@@ -56,6 +56,7 @@ INSTALLED_APPS = [
     'social',
     'landing',
     'donation',
+    'product',
 
     'crispy_forms',
     'storages',
@@ -197,3 +198,8 @@ LOGIN_REDIRECT_URL = 'post-list'
 ACCOUNT_EMAIL_REQUIRED = True
 # Send emails to the terminal
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+
+# Stripe
+STRIPE_PUBLIC_KEY = os.getenv('STRIPE_PUBLIC_KEY', '')
+STRIPE_SECRET_KEY = os.getenv('STRIPE_SECRET_KEY', '')
+STRIPE_WH_SECRET = os.getenv('STRIPE_WH_SECRET', '')
