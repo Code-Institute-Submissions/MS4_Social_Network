@@ -1,142 +1,74 @@
 {% extends 'landing/base.html' %}
 {% load crispy_forms_tags %}
 
+{% block extra_stripe_css %}
+    <script src="https://polyfill.io/v3/polyfill.min.js?version=3.52.1&features=fetch"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+
+{% endblock extra_stripe_css %}
 
 {% block content %}
 <div class="container">
     <!-- Add post header -->
     <div class="row justify-content-center mt-3">
-        <div class="col-md-5 col-sm-12 border-bottom text-center">
+        <div class="col-md-5 col-sm-12 text-center">
             <h1>Donate!</h1>
         </div>
     </div>
 </div>
-<div class="payment-container">
-    <div class="row justify-content-center">
-        <div class="col-sm-6 offset-sm-6 m-5">
-            <div class="card text-center">
-                <div class="card-body m-5">
-                    <h3>Donation details</h3>
-                    <div class="amount-container">
-                        <button type="button" class="btn btn-outline-primary m-3">€5</button>
-                        <button type="button" class="btn btn-outline-primary m-3">€10</button>
-                        <button type="button" class="btn btn-outline-primary m-3">€20</button>
-                        <button type="button" class="btn btn-outline-primary m-3">Other</button>
-                    </div>
-                    <h3 class="mt-5">Repeat?</h3>
-                    <div class="long-container">
-                        <button type="button" class="btn btn-outline-primary m-3">One Time</button>
-                        <button type="button" class="btn btn-outline-primary m-3">Monthly</button>
-                        <button type="button" class="btn btn-outline-primary m-3">Yearly</button>
-                    </div>
-                    <p>You can change how much you give or cancel your recurring contributions anytime.</p>
-                    <a href="#" id="open-popup-1" class="btn btn-lg btn-primary">Donate</a>
-                </div>
-            </div>
-        </div>
-        
-        <div id="popup-1">
-            <div class="popup-content">
-                <button class="btn-close float-end" aria-label="Close" id="close-popup-1"></button>
-                <h1>Payment</h1>
-                <form>
-                    <div class="form-row">
-                        <div class="form-group col-sm-12 mb-3">
-                            <label for="inputEmail4">Email</label>
-                            <input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-                        </div>
-                        <div class="form-group col-sm-12 mb-3">
-                            <label for="inputPassword4">Password</label>
-                            <input type="password" class="form-control" id="inputPassword4" placeholder="Password">
-                        </div>
-                    </div>
-                    <div class="form-group col-sm-12 mb-3">
-                        <label for="inputAddress">Address</label>
-                        <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-                    </div>
-                    <div class="form-group col-sm-12 mb-3">
-                        <label for="inputAddress2">Address 2</label>
-                        <input type="text" class="form-control" id="inputAddress2"
-                            placeholder="Apartment, studio, or floor">
-                    </div>
-                    <div class="form-row">
-                        <div class="form-group col-sm-12 mb-3">
-                            <label for="inputCity">City</label>
-                            <input type="text" class="form-control" id="inputCity">
-                        </div>
-                        <div class="form-group col-sm-12 mb-3">
-                            <label for="inputState">State</label>
-                            <select id="inputState" class="form-control">
-                                <option selected>Choose...</option>
-                                <option>...</option>
-                            </select>
-                        </div>
-                        <div class="form-group col-sm-12 mb-3">
-                            <label for="inputZip">Zip</label>
-                            <input type="text" class="form-control" id="inputZip">
-                        </div>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Donate</button>
-                    
-                </form>
-            </div>
-        </div>
-            <div id="popup-2">
-                <div class="popup-content">
-                    <button class="btn-close float-end" aria-label="Close" id="close-popup-2"></button>
-                    <h1>Contact</h1>
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="name" class="form-control" id="name" placeholder="Name">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlInput1" class="form-label">Email address</label>
-                        <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-                    </div>
-                    <div class="mb-3">
-                        <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-                    </div>
-                    <button class="btn btn-primary">Send</button>
-                    
-                </div>
-            </div>
 
-            <div class="contact-site text-center m-5">
-                <h1 class="mb-5">Contact us!</h1>
-                <button class="btn-lg btn-primary" id="open-popup-2">Contact</button> 
+<div class="container">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-5 col-sm-12 text-center">
+            <div class="product">
+                <img src="https://i.imgur.com/EHyR2nP.png" alt="The cover of Stubborn Attachments" />
+                <div class="description">
+                    <h3>{{ product.name }}</h3>
+                    <h5>${{ product.get_display_price }}</h5>
+                </div>
             </div>
+            <button class="btn-lg btn-dark" type="button" id="checkout-button">Checkout</button>
         </div>
     </div>
 </div>
-<script>
 
-    var popup1 = document.getElementById("popup-1")
-    var openPopup1 = document.getElementById("open-popup-1")
-    var closePopup1 = document.getElementById('close-popup-1')
-
-    openPopup1.addEventListener('click', () => {
-        popup1.style.display = "block";
-    })
-
-    closePopup1.addEventListener('click', () => {
-        popup1.style.display = "none";
-    })
-
-    var popup2 = document.getElementById("popup-2")
-    var openPopup2 = document.getElementById("open-popup-2")
-    var closePopup2 = document.getElementById('close-popup-2')
-
-    openPopup2.addEventListener('click', () => {
-        popup2.style.display = "block";
-    })
-
-    closePopup2.addEventListener('click', () => {
-        popup2.style.display = "none";
-    })
-
-</script>
-
-
+{% csrf_token %}
 
 {% endblock content %}
+
+{% block extra_stripe_js %}
+
+
+    <script type="text/javascript">
+    const csrftoken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+    // Create an instance of the Stripe object with your publishable API key
+    var stripe = Stripe("{{ STRIPE_PUBLIC_KEY }}");
+    var checkoutButton = document.getElementById("checkout-button");
+    checkoutButton.addEventListener("click", function () {
+      fetch("{% url 'create-checkout-session' product.id %}", {
+        method: "POST",
+        headers: {
+            'X-CSRFToken': csrftoken
+        }
+      })
+        .then(function (response) {
+          return response.json();
+        })
+        .then(function (session) {
+          return stripe.redirectToCheckout({ sessionId: session.id });
+        })
+        .then(function (result) {
+          // If redirectToCheckout fails due to a browser or network
+          // error, you should display the localized error message to your
+          // customer using error.message.
+          if (result.error) {
+            alert(result.error.message);
+          }
+        })
+        .catch(function (error) {
+          console.error("Error:", error);
+        });
+    });
+    </script>
+
+{% endblock extra_stripe_js %}

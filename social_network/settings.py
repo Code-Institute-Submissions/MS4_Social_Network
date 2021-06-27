@@ -56,7 +56,6 @@ INSTALLED_APPS = [
     'social',
     'landing',
     'donation',
-    'product',
 
     'crispy_forms',
     'storages',
