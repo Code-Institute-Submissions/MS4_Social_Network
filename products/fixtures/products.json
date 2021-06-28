@@ -1,0 +1,29 @@
+[
+  {
+    "pk": 1,
+    "model": "products.product",
+    "fields": {
+      "name": "10 Euro",
+      "price": 10.00,
+      "description": "Our Free Tier is perfect for a small group that wants to challenge each other. Throw the gauntlet down and see who comes up with the best response."
+    }
+  },
+  { 
+    "pk": 2,
+    "model": "products.product",
+    "fields": {
+      "name": "15 Euro",
+      "price": 15.00,
+      "description": "Challenge your friends and see your skills blast off to new heights. Share videos and imagery for whatever skill sets you have in common."
+    }
+  },
+  {
+    "pk": 3,
+    "model": "products.product",
+    "fields": {
+      "name": "20 Euro",
+      "price": 20.00,
+      "description": "The Interstellar package will boost your abilities to infinity and beyond. Grab your groups and challenge on."
+    }
+  }
+]

@@ -29,7 +29,7 @@
                 <li class="nav-item">
                     <span class="d-inline-block" tabindex="0" data-bs-toggle="popover" data-bs-trigger="hover focus"
                         data-bs-content="Donation">
-                        <a class="nav-link m-4" href="{% url 'donation' %}">
+                        <a class="nav-link m-4" href="">
                             <img src="{{ MEDIA_URL }}uploads/post_photos/donation.png" alt="" width="40" height="40">
                         </a>
                     </span>
@@ -47,7 +47,7 @@
             <form class="d-flex" method="GET" action="{% url 'profile-search' %}">
                 <div class="input-group">
                     <span class="input-group-text" id="basic-addon1"><i class="fas fa-search"></i></span>
-                    <input type="search" class="form-control" placeholder="Search for developer" aria-label="Username"
+                    <input type="search" class="form-control" placeholder="Search for gamers" aria-label="Username"
                         aria-describedby="basic-addon1" name="query" value="{{ request.GET.query }}">
                 </div>
             </form>
