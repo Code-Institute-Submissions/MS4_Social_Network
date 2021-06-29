@@ -1,0 +1,63 @@
+{% extends 'landing/base.html' %}
+{% load static crispy_forms_tags %}
+
+
+{% block content %}
+    <div class="row text-center">
+        <div class="col-sm-4 offset-4">
+            <h2>{{ product.name }}</h2>
+        </div>
+        <div class="col-sm-4 offset-4">
+            <div class="card-text product-description">{{ product.description }}</div>
+            <h3>Total: {{ product.price }} Euro</h3>
+        </div>
+        <div class="col-sm-4 offset-4">
+            <div class="product-img-wrap checkout">
+                <img class="card-img-top" src="{{ MEDIA_URL }}{{ product.image }}" alt="Image for {{ product.name }}">
+            </div>
+        </div>
+    </div>
+    <div class="row text-center">
+        <div class="col-sm-12">
+            <h2>Payment Details</h2>
+        </div>
+    </div>
+    <form role="form" method="post" id="payment-form" action="{% url 'checkout' pk=product.pk %}">
+        {% csrf_token %}
+
+        <div class="alert alert-danger" role="alert" id="credit-card-errors" style="display: none;">
+            <div id="stripe-error-message"></div>
+        </div>
+        <div class="row">
+            <div class="col-sm-4 offset-4">
+                <div class="form-group m-3">
+                    {{ payment_form.credit_card_number|as_crispy_field }}
+                </div>
+                <div class="form-group m-3">
+                    {{ payment_form.ccv|as_crispy_field }}
+                </div>
+            </div>
+            <div class="col-sm-4 offset-4">
+                <div class="form-group m-3">
+                    {{ payment_form.expiry_month|as_crispy_field }}
+                </div>
+                <div class="form-group m-3">
+                    {{ payment_form.expiry_year|as_crispy_field }}
+                </div>
+            </div>
+
+            <div class="form-group">
+                {{ payment_form.stripe_id|as_crispy_field }}
+            </div>
+
+        </div>
+        <div class="row text-center m-5">
+            <div class="form-group col-sm-4 offset-4">
+                <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit"
+                       value="Submit Payment">
+                <a class="btn btn-cancel" href="{% url 'products' %}">Cancel</a>
+            </div>
+        </div>
+    </form>
+
+{% endblock %}
