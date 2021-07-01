@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'storages',
     'django_extensions',
+    'django_forms_bootstrap',
 ]
 
 SITE_ID = 1

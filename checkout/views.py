@@ -5,7 +5,6 @@ from .forms import MakePaymentForm
 from django.conf import settings
 from products.models import Product
 from .models import Order
-from django.contrib import messages
 from django.contrib.auth.models import User
 from social.models import UserProfile
 import stripe
@@ -17,6 +16,8 @@ import stripe
 def checkout(request, pk):
     product = Product.objects.get(id=pk)
     user = User.objects.get(email=request.user.email)
+    stripe.api_key = settings.STRIPE_SECRET_KEY
+    message = None
     if request.method == "POST":
         if 'cancel' in request.POST:
             return redirect(reverse('products'))
@@ -31,49 +32,50 @@ def checkout(request, pk):
         if product.price == 0:
             order.payment_status = 'payment_collected'
             order.save()
-            profile = UserProfile.objects.get(user=user)
-            profile.Product = product
-            profile.save()
-            messages.success(request, "Your service level has been changed.")
             return redirect(reverse('profile'))
-
         elif payment_form.is_valid():
             order.save()
 
             try:
+                # secure token via stripe
+                cardStripped = stripe.Token.create(
+                    card={
+                        'number': payment_form.cleaned_data['credit_card_number'],
+                        'exp_month': int(payment_form.cleaned_data['expiry_month']),
+                        'exp_year': int(payment_form.cleaned_data['expiry_year']),
+                        'cvc': str(payment_form.cleaned_data['ccv'])
+                    },
+                )
+           
                 # stripe takes integer amount so need to multiply from cents up
-                customer = stripe.Charge.create(
+                stripe.Charge.create(
                     amount=int(product.price * 100),
                     currency="USD",
                     description=request.user.email,
-                    card=payment_form.cleaned_data['stripe_id'],
+                    card=cardStripped
                 )
+
+                return render(request, "checkout/success.html",
+                        {'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLIC_KEY, 'product': product,
+                        'customer': user})
+
             except stripe.error.CardError:
                 # user has not paid, update the Order status
                 order.payment_status = 'payment_rejected'
                 order.save()
-                messages.error(request, "Sorry, your card was declined.")
+                message = stripe.error.CardError
 
-            if customer.paid:
-                # user has paid, update the Order status
-                messages.success(request, "Your payment was success and your service level has been updated.")
-                order.payment_status = 'payment_collected'
-                order.save()
-                # user has paid, update the Customer object with the product, so they get more features enabled
-                profile = UserProfile.objects.get(user=user)
-                profile.product_level = product
-                profile.save()
-                return redirect(reverse('profile'))
             else:
                 # user has not paid, update the Order status
                 order.payment_status = 'payment_rejected'
                 order.save()
-                messages.error(request, "Unable to take payment")
+            
         else:
             messages.success(request, "Please enter your payment information below.")
+
     else:
         payment_form = MakePaymentForm()
 
     return render(request, "checkout/checkout.html",
-                  {'payment_form': payment_form, 'product': product,
-                   'customer': user})
+            {'payment_form': payment_form, 'publishable': settings.STRIPE_PUBLIC_KEY, 'product': product,
+            'customer': user})
