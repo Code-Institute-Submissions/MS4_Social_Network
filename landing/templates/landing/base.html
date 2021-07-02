@@ -30,16 +30,21 @@
 
 <body>
   {% include 'landing/navbar.html' %}
+  <div class="msg-container">
+    <div class="row text-center">
+      <div class="col">
+        {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            {{ message }}
+          {% endfor %}
+        </ul>
+        {% endif %}
+      </div>
+    </div>
+  </div>
   {% block content %}
-    {% if messages %}
-        <div class="row justify-content-center pt-3">
-          <div class="col-md-6">
-            {% for message in messages %}
-              <div class="alert alert-primary" role="alert">{{ message }}</div>
-            {% endfor %}
-          </div>
-        </div>
-    {% endif %}
+
   {% endblock content %}
 
   {% block extra_stripe_js %}

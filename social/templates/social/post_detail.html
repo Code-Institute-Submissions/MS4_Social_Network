@@ -78,8 +78,8 @@
     <!-- List comments -->
     {% for comment in comments %}
     {% if comment.is_parent %}
-    <div class="row justify-content-center mt-3 mb-5 border-bottom">
-        <div class="col-md-5 col-sm-12">
+    <div class="row justify-content-center mt-3">
+        <div class="col-md-7 col-sm-7 position-relative card shadow rounded">
             <p>
                 <div class="py-3">
                     <a href="{% url 'profile' comment.author.profile.pk %}">
@@ -124,7 +124,7 @@
         </div>
     </div>
     <!-- comment on comments -->
-    <div class="row justify-content-center mt-3 mb-5 d-none" id="{{ comment.pk }}">
+    <div class="row justify-content-center mt-3" id="{{ comment.pk }}">
         <div class="col-md-5 col-sm-12">
             <form method="POST" action="{% url 'comment-reply' post.pk comment.pk %}">
                 {% csrf_token %}
@@ -138,7 +138,7 @@
     <!-- List comments on comments -->
     {% for child_comment in comment.children %}
         <div class="row justify-content-center mt-3 mb-5 child-comment">
-            <div class="col-md-5 col-sm-12 border-bottom">
+            <div class="col-md-6 col-sm-6 position-relative card shadow rounded">
                 <p>
                     <div>
                         <a href="{% url 'profile' child_comment.author.profile.pk %}">

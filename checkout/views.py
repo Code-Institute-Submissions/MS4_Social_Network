@@ -7,6 +7,7 @@ from products.models import Product
 from .models import Order
 from django.contrib.auth.models import User
 from social.models import UserProfile
+from django.contrib import messages
 import stripe
 
 # Create your views here.
@@ -63,7 +64,7 @@ def checkout(request, pk):
                 # user has not paid, update the Order status
                 order.payment_status = 'payment_rejected'
                 order.save()
-                message = stripe.error.CardError
+                messages.error(request, 'payment rejected')
 
             else:
                 # user has not paid, update the Order status
@@ -71,7 +72,7 @@ def checkout(request, pk):
                 order.save()
             
         else:
-            messages.success(request, "Please enter your payment information below.")
+            messages.success(request, "Success")
 
     else:
         payment_form = MakePaymentForm()

@@ -3,7 +3,8 @@
 
 {% block extra_stripe_js %}
 
-<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
 <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
 <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
 
@@ -16,29 +17,32 @@
 {% endblock extra_stripe_js %}
 
 {% block content %}
+<div class="container">
     <div class="row text-center">
-        <div class="col-sm-4 offset-4">
+        <div class="col-sm-12">
             <h2>{{ product.name }}</h2>
         </div>
-        <div class="col-sm-4 offset-4">
+        <div class="col-sm-12 col-md-4 offset-md-4">
             <div class="card-text product-description">{{ product.description }}</div>
             <h3>Total: {{ product.price | format_price }} Euro</h3>
         </div>
-        <div class="col-sm-4 offset-4">
+        <div class="col-sm-12 col-md-4 offset-md-4">
             <div class="product-img-wrap checkout">
                 <img class="card-img-top" src="{{ MEDIA_URL }}{{ product.image }}" alt="Image for {{ product.name }}">
             </div>
         </div>
     </div>
+
     <div class="row text-center">
-        <div class="col-sm-12">
+        <div class="col-sm-12 col-md-4 offset-md-4">
             <h2>Payment Details</h2>
         </div>
     </div>
+
     <form role="form" method="post" id="payment-form" action="{% url 'checkout' pk=product.pk %}">
         {% csrf_token %}
         <div class="row">
-            <div class="col-sm-4 offset-4">
+            <div class="col-sm-12 col-md-4 offset-md-4">
                 <div class="form-group m-3">
                     {{ payment_form.credit_card_number|as_crispy_field }}
                 </div>
@@ -46,7 +50,7 @@
                     {{ payment_form.ccv|as_crispy_field }}
                 </div>
             </div>
-            <div class="col-sm-4 offset-4">
+            <div class="col-sm-12 col-md-4 offset-md-4">
                 <div class="form-group m-3">
                     {{ payment_form.expiry_month|as_crispy_field }}
                 </div>
@@ -54,16 +58,14 @@
                     {{ payment_form.expiry_year|as_crispy_field }}
                 </div>
             </div>
-
-
         </div>
         <div class="row text-center m-5">
-            <div class="form-group col-sm-4 offset-4">
-                <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit"
-                       value="Submit Payment">
+            <div class="form-group col-sm-12 col-md-4 offset-md-4">
+                <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">
                 <a class="btn btn-cancel" href="{% url 'products' %}">Cancel</a>
             </div>
         </div>
     </form>
+</div>
 
 {% endblock %}

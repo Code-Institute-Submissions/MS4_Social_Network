@@ -7,6 +7,7 @@ from django.views import View
 from django.views.generic.edit import UpdateView, DeleteView
 from .models import Post, Comment, UserProfile
 from .forms import PostForm, CommentForm
+from django.contrib import messages
 
 
 # View for Post List
