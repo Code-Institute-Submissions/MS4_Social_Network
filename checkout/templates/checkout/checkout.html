@@ -2,12 +2,14 @@
 {% load static crispy_forms_tags bootstrap_tags products_tags %}
 
 {% block extra_stripe_js %}
-
+<!-- JQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
     crossorigin="anonymous"></script>
+<!-- Stripe -->
 <script type="text/javascript" src="https://js.stripe.com/v3/"></script>
+<!-- Static stripe.js -->
 <script type="text/javascript" src="{% static 'js/stripe.js' %}"></script>
-
+<!-- Public Key stripe -->
 <script type="text/javascript">
     //<![CDATA[
     Stripe.publishableKey = '{{ STRIPE_PUBLIC_KEY }}';
@@ -17,6 +19,7 @@
 {% endblock extra_stripe_js %}
 
 {% block content %}
+<!-- Show product information -->
 <div class="container">
     <div class="row text-center">
         <div class="col-sm-12">
@@ -32,13 +35,13 @@
             </div>
         </div>
     </div>
-
+    <!-- Payment Details -->
     <div class="row text-center">
         <div class="col-sm-12 col-md-4 offset-md-4">
             <h2>Payment Details</h2>
         </div>
     </div>
-
+    <!-- Payment -->
     <form role="form" method="post" id="payment-form" action="{% url 'checkout' pk=product.pk %}">
         {% csrf_token %}
         <div class="row">
@@ -59,6 +62,7 @@
                 </div>
             </div>
         </div>
+        <!-- Submit and Cancel buttons -->
         <div class="row text-center m-5">
             <div class="form-group col-sm-12 col-md-4 offset-md-4">
                 <input class=" btn btn-primary" id="submit_payment_btn" name="commit" type="submit" value="Submit Payment">

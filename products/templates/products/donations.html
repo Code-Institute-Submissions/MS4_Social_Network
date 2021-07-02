@@ -3,6 +3,7 @@
 
 
 {% block content %}
+<!-- Products header -->
 <div class="container-fluid">
     <div class="row">
         <div class="col text-center mt-3">
@@ -10,6 +11,7 @@
             <hr class="w-100 mb-1">
         </div>
     </div>
+    <!-- Go throw all products and display them -->
     <div class="row">
         <div class="product-container col-10 offset-1">
             <div class="row mt-1 mb-2"></div>
@@ -36,6 +38,7 @@
                         </div>
                     </div>
                 </div>
+                <!-- forloop to display the products in a nice way depending on screen size, From code institutes walktrough project boutique ado -->
                 {% if forloop.counter|divisibleby:1 %}
                 <div class="col-12 d-sm-none mb-5">
                     <hr>

@@ -16,4 +16,3 @@ class MakePaymentForm(forms.Form):
     ccv = forms.CharField(label="Security Code", required=True)
     expiry_month = forms.ChoiceField(choices=MONTH_CHOICES, required=True)
     expiry_year = forms.ChoiceField(choices=YEAR_CHOICES, required=True)
-   # stripe_id = forms.CharField(widget=forms.HiddenInput)

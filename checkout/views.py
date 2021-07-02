@@ -10,9 +10,8 @@ from social.models import UserProfile
 from django.contrib import messages
 import stripe
 
-# Create your views here.
 
-
+# Checkout view
 @login_required()
 def checkout(request, pk):
     product = Product.objects.get(id=pk)

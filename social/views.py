@@ -23,13 +23,17 @@ class PostListView(LoginRequiredMixin, View):
 
     def get(self, request, *args, **kwargs):
         """
-        Check if user logged in, then show post from other users that the current user logged in follows
+        Check if user logged in, then show post from
+        other users that the current user logged in follows
         """
         context = self.get_default_context(request)
         context["form"] = PostForm()
         return render(request, 'social/post_list.html', context)
 
     def post(self, request, *args, **kwargs):
+        """
+        Post form
+        """
         form = PostForm(request.POST, request.FILES)
         if form.is_valid():
             new_post = form.save(commit=False)
@@ -87,13 +91,6 @@ class PostDetailView(LoginRequiredMixin, View):
 # Function for reply on comments
 class CommentReplyView(LoginRequiredMixin, View):
     def post(self, request, post_pk, pk, *args, **kwargs):
-        """
-        Here you describe the function 
-        on multiple lines
-        request: Request
-        post_pk: int
-        ...
-        """
         post = Post.objects.get(pk=post_pk)
         parent_comment = Comment.objects.get(pk=pk)
         form = CommentForm(request.POST)
@@ -161,12 +158,6 @@ class ProfileView(View):
         profile = UserProfile.objects.get(pk=pk)
         user = profile.user
 
-        # user = request.user
-        # profile = request.user.profile
-
-        # is_following = profile.followers.filter(user=request.user).exist()
-        # number_of_followers = profile.followers.all().count()
-
         # Show followers
         followers = profile.followers.all()
         if len(followers) == 0:
@@ -229,8 +220,9 @@ class AddLike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
         is_dislike = False
-        # TODO Change this to be a check in the database instead
-        # if else statement to check if user already liked the post
+        """
+        if else statement to check if user already liked the post
+        """
         for dislike in post.dislikes.all():
             if dislike == request.user:
                 is_dislike = True
@@ -297,7 +289,7 @@ class AddCommentLike(LoginRequiredMixin, View):
 
         is_dislike = False
         """
-        if else statement to check if user already liked the post
+        if else statement to check if user already liked the comment
         """
         for dislike in comment.dislikes.all():
             if dislike == request.user:
@@ -331,7 +323,7 @@ class AddCommentDislike(LoginRequiredMixin, View):
 
         is_like = False
         """
-        if else statement to check if user already disliked the post
+        if else statement to check if user already disliked the comment
         """
         for like in comment.likes.all():
             if like == request.user:
