@@ -1,1 +1,24 @@
-Success!
+{% extends 'landing/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="overlay"></div>
+    <div class="container">
+        <div class="row text-center">
+            <div class="col">
+                <hr>
+                <h1 class="logo-font mb-4">Thank You for your {{ product.name }}</h1>
+                <hr>
+                <img src="{{ MEDIA_URL }}uploads/post_photos/chess.jpg" height="500px" width="800px" alt="">
+            </div>
+        </div>
+        <div class="container">
+            <div class="row text-center m-5">
+                <div class="col">
+                    <a class="btn-lg btn-dark" href="{% url 'products' %}">Get back to products!</a>
+                    <a class="btn-lg btn-light" href="{% url 'post-list' %}">Get back to posts!</a>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
