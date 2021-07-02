@@ -130,7 +130,6 @@ class PostDeleteView(LoginRequiredMixin, UserIsAuthorMixin, DeleteView):
     template_name = 'social/post_delete.html'
     success_url = reverse_lazy('post-list')
 
-
 # Function for user to delete comments
 class CommentDeleteView(LoginRequiredMixin, UserIsAuthorMixin, DeleteView):
     model = Comment

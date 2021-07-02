@@ -3,12 +3,90 @@
 /* index.html */
 body {
     font-family: 'Orbitron';
+    background: rgb(100,65,165);
+    background: linear-gradient(90deg, rgba(100,65,165,1) 0%, rgba(42,8,69,1) 100%);
+    color: white;
 }
 
+.btn-cancel {
+    background-color: rgba(220, 17, 1, 0.16);
+    box-shadow: 0px 0px 2px #ff0303;
+    color: #ff0303;
+    text-shadow: 2px 1px #00040a;
+}
+
+.btn-cancel:hover {
+    background-color: rgba(220, 17, 1, 0.33);
+    transition: 0.5s;
+    color: white;
+}
+
+.btn-dark, .btn-light, .btn-success, .btn-primary {
+    background-color: rgba(7, 149, 66, 0.3);
+    box-shadow: 0px 0px 2px #259c08;
+    color: #0ad406;
+    text-shadow: 2px 1px #00040a;
+    border-color: transparent;
+    text-decoration: none;
+}
+
+.btn-dark:hover, .btn-light:hover, .btn-success:hover, .btn-primary:hover {
+    background-color: rgba(7, 149, 66, 0.35);
+    transition: 0.5s;
+    border-color: transparent;
+    color: white;
+}
+
+
 .msg-container {
-    font-size: 40px;
+    font-size: 2em;
     font-weight: bold;
-    color: white;}
+    background-color: rgba(220, 128, 1, 0.16);
+    box-shadow: 0px 0px 2px #ffb103;
+    color: #ffb103;
+    text-shadow: 2px 1px #00040a;
+}
+
+.navbar-brand span {
+    font-size: 1.3em;
+    color: white;
+}
+#profile-card {
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+}
+
+.card {
+    color: black;
+    padding: 0 1em 1em 1em;
+}
+
+.card-body {
+    color: black;
+}
+
+.card-footer {
+    color: black;
+}
+
+.post-card {
+    display: flex;
+    flex-direction: column;
+}
+
+#div_id_image label {
+    margin: 0.5em 0;
+}
+
+.edit_delete_btn {
+    position: absolute;
+    align-self: flex-end;
+}
+
+.edit_delete_btn i {
+    padding: 0.3em;
+}
 
 .landing-img {
     height: 100vh;
@@ -39,11 +117,6 @@ body {
   }
 }
 
-body {
-    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.81) , rgba(31, 50, 122, 0.81));
-}
-
-
 
 @media screen and (max-width: 1439px) {
     #chess-success {
@@ -69,7 +142,6 @@ body {
     background-color: transparent;
     border: none;
     box-shadow: none;
-
     display:inline-block;
 }
 
@@ -83,6 +155,16 @@ body {
 
 .post-text {
     padding-top: 0.5rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.post-body-text p {
+    padding-bottom: 1em;
+}
+
+.post-created {
+    font-size: 0.8em;
 }
 
 .post-img {
