@@ -38,7 +38,6 @@
                         <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
                         <h5> {{ post.author }}</h5></a>
                         <p>{{ post.created_on }}</p>
-                        </a>
                     </p>
                     <!-- if user is author of post give them ability to edit and delete the post -->
                     {% if request.user == post.author %}

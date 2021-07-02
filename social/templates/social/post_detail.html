@@ -9,13 +9,12 @@
         <div class="col-md-8 col-sm-8 position-relative card shadow rounded">
                 <div class="py-3 card-body">
                     <a href="{% url 'profile' post.author.profile.pk %}">
-                        <img class="rounded-circle post-img" height="60" width="60" src="{{ post.author.profile.picture.url }}">
+                        <img class="rounded-circle post-img" alt="" height="60" width="60" src="{{ post.author.profile.picture.url }}">
                     </a>
                     <p class="post-text">
                         <a href="{% url 'profile' post.author.profile.pk %}" class="text-primary post-link">
                         <h5> {{ post.author }}</h5></a>
                         <p class="border-bottom">{{ post.created_on }}</p>
-                        </a>
                     </p>
                     <!-- If the user that created post give them oppertunity to delete and edit post -->
                     {% if request.user == post.author %}
@@ -33,7 +32,7 @@
                 <!-- if theres a img show otherwise only show post -->
                 <div class="position-relative ms-3 post-body-text">
                     {% if post.image %}
-                        <img src="{{ post.image.url }}" class="post-image border-bottom">
+                        <img alt="" src="{{ post.image.url }}" class="post-image border-bottom">
                     {% endif %}
                     <p class="border-bottom">{{ post.body }}</p>
                     <a href="{% url 'post-detail' post.pk %}" class="stretched-link"></a>
@@ -83,12 +82,11 @@
             <p>
                 <div class="py-3">
                     <a href="{% url 'profile' comment.author.profile.pk %}">
-                        <img class="rounded-circle post-img" height="45" width="45" src="{{ comment.author.profile.picture.url }}">
+                        <img alt="" class="rounded-circle post-img" height="45" width="45" src="{{ comment.author.profile.picture.url }}">
                     </a>
                     <p class="post-text">
                         <a href="{% url 'profile' comment.author.profile.pk %}" class="text-primary post-link">
                         <span> {{ comment.author }}</span></a> {{ comment.created_on }}
-                        </a>
                     </p>
                 </div>
                 <!-- if user is author of comment give them ability to edit and delete the comment -->
@@ -142,7 +140,7 @@
                 <p>
                     <div>
                         <a href="{% url 'profile' child_comment.author.profile.pk %}">
-                            <img class="round-circle post-img" height="30" width="30" src="{{ child_comment.author.profile.picture.url }}" />
+                            <img alt="" class="round-circle post-img" height="30" width="30" src="{{ child_comment.author.profile.picture.url }}" />
                         </a>
                         <p class="post-text">
                             <a class="text-primary post-link" href="{% url 'profile' child_comment.author.profile.pk %}">@{{ child_comment.author }}</a> {{ child_comment.created_on }}
