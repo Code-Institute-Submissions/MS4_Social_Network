@@ -35,21 +35,25 @@
                 </div>
                 <!-- Show post likes and dislikes -->
             <div class="d-flex flex-row">
+            <section class="rating-area">
                 <form method="POST" action="{% url 'like' post.pk %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button class="remove-default-btn" type="submit">
-                        <i class="far fa-thumbs-up"><span>{{ post.likes.all.count }}</span></i>
+                    <button type="submit" class="thumbs-up-circle">
+                        <span class="thumbs-up"><i class="icon fa fa-thumbs-up thumb "></i></span>
                     </button>
+                    <span class="count">{{ post.likes.all.count }}</span>
                 </form>
 
                 <form method="POST" action="{% url 'dislike' post.pk %}">
                     {% csrf_token %}
                     <input type="hidden" name="next" value="{{ request.path }}">
-                    <button class="remove-default-btn" type="submit">
-                        <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
+                    <button type="submit" class="thumbs-down-circle">
+                        <span class="thumbs-down"><i class="icon fa fa-thumbs-down thumb "></i></span>
                     </button>
+                    <span class="count">{{ post.dislikes.all.count }}</span>
                 </form>
+            </section>
             </div>
         </div>
     </div>
@@ -96,26 +100,30 @@
             <p class="border-bottom">{{ comment.comment }}</p>
             <!-- Show comments likes and dislikes -->
             <div class="d-flex flex-row">
-                <form method="POST" action="{% url 'comment-like' post.pk comment.pk %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button class="remove-default-btn" type="submit">
-                        <i class="far fa-thumbs-up"> <span>{{ comment.likes.all.count }}</span></i>
-                    </button>
-                </form>
+                <section class="rating-area">
+                    <form method="POST" action="{% url 'comment-like' post.pk comment.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit" class="thumbs-up-circle">
+                            <span class="thumbs-up"><i class="icon fa fa-thumbs-up thumb "></i></span>
+                        </button>
+                        <span class="count">{{ comment.likes.all.count }}</span>
+                    </form>
 
-                <form method="POST" action="{% url 'comment-dislike' post.pk comment.pk %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button class="remove-default-btn" type="submit">
-                        <i class="far fa-thumbs-down"> <span>{{ comment.dislikes.all.count }}</span></i>
-                    </button>
-                </form>
-                <div>
-                    <button class="remove-default-btn">
-                        <i class="far fa-comment-dots" onclick="commentReplyToggle('{{ comment.pk }}')"></i>
-                    </button>
-                </div>
+                    <form method="POST" action="{% url 'comment-dislike' post.pk comment.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit" class="thumbs-down-circle">
+                            <span class="thumbs-down"><i class="icon fa fa-thumbs-down thumb "></i></span>
+                        </button>
+                        <span class="count">{{ comment.dislikes.all.count }}</span>
+                    </form>
+                    <div class="comment-icon-area">
+                        <button class="remove-default-btn">
+                            <i class="far fa-comment-dots" onclick="commentReplyToggle('{{ comment.pk }}')"></i>
+                        </button>
+                    </div>
+                </section>
             </div>
         </div>
     </div>
@@ -136,7 +144,7 @@
         <div class="row justify-content-center mt-3 mb-5 child-comment">
             <div class="col-md-6 col-sm-6 position-relative card shadow rounded">
                 <p>
-                    <div>
+                    <div class="post-card">
                         <a href="{% url 'profile' child_comment.author.profile.pk %}">
                             <img alt="" class="round-circle post-img" height="30" width="30" src="{{ child_comment.author.profile.picture.url }}" />
                         </a>

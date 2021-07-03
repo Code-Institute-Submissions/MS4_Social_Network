@@ -14,9 +14,7 @@ from django.contrib import messages
 class PostListView(LoginRequiredMixin, View):
 
     def get_default_context(self, request) -> dict:
-        posts = Post.objects.filter(
-            author__profile__followers__in=[request.user.id]   
-        ).order_by('-created_on') 
+        posts = Post.objects.filter().order_by('-created_on')
         return {
             'post_list': posts
         }
@@ -39,6 +37,7 @@ class PostListView(LoginRequiredMixin, View):
             new_post = form.save(commit=False)
             new_post.author = request.user
             new_post.save()
+            form=PostForm()
             messages.success(request, 'Posted!')
         context = self.get_default_context(request)
         context["form"] = form
@@ -75,6 +74,7 @@ class PostDetailView(LoginRequiredMixin, View):
             new_comment.author = request.user
             new_comment.post = post
             new_comment.save()
+            form=CommentForm()
             messages.success(request, 'Commented!')
 
         comments = Comment.objects.filter(post=post).order_by('-created_on')

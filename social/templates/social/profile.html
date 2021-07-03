@@ -101,21 +101,25 @@
             </div>
             <!-- Show post likes and dislikes -->
             <div class="d-flex flex-row">
-                <form method="POST" action="{% url 'like' post.pk %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button class="remove-default-btn" type="submit">
-                        <i class="far fa-thumbs-up"> <span>{{ post.likes.all.count }}</span></i>
-                    </button>
-                </form>
+                <section class="rating-area">
+                    <form method="POST" action="{% url 'like' post.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit" class="thumbs-up-circle">
+                            <span class="thumbs-up"><i class="icon fa fa-thumbs-up thumb "></i></span>
+                        </button>
+                        <span class="count">{{ post.likes.all.count }}</span>
+                    </form>
 
-                <form method="POST" action="{% url 'dislike' post.pk %}">
-                    {% csrf_token %}
-                    <input type="hidden" name="next" value="{{ request.path }}">
-                    <button class="remove-default-btn" type="submit">
-                        <i class="far fa-thumbs-down"> <span>{{ post.dislikes.all.count }}</span></i>
-                    </button>
-                </form>
+                    <form method="POST" action="{% url 'dislike' post.pk %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="next" value="{{ request.path }}">
+                        <button type="submit" class="thumbs-down-circle">
+                            <span class="thumbs-down"><i class="icon fa fa-thumbs-down thumb "></i></span>
+                        </button>
+                        <span class="count">{{ post.dislikes.all.count }}</span>
+                    </form>
+                </section>
             </div>
         </div>
     </div>

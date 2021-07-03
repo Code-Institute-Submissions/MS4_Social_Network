@@ -48,7 +48,6 @@ $(function () {
 
     /* submit payment button */
     $('#payment-form').submit(function () {
-        console.log("TESTAR")
         //pull off card details
         var form = this;
         var card = {
@@ -80,3 +79,14 @@ $(function () {
         return false;
     });
 });
+
+
+// Thumbs up and down function
+$(function () {
+
+  $('.like-buttons').submit(function() {
+      console.log("HERE")
+      $('.like-buttons').removeClass("active");
+      $(this).addClass("active");
+  })
+})
