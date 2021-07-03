@@ -101,6 +101,7 @@ class CommentReplyView(LoginRequiredMixin, View):
             new_comment.post = post
             new_comment.parent = parent_comment
             new_comment.save()
+            form=CommentForm()
             messages.success(request, 'Commented!')
 
         return redirect('post-detail', pk=post_pk)
