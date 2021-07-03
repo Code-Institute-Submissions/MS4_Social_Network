@@ -5,16 +5,16 @@
     <div class="container">
         <!-- check if user wan't to remove post -->
         <div class="row justify-content-center mt-3 mb-5">
-            <div class="col-md-5 col-sm-12 border-bottom">
+            <div class="col-md-5 col-sm-12">
                 <form method="Post">
                     {% csrf_token %}
                     <h5>Are you sure?</h5>
                     <p>You are about to delete this post, this cannot be undone.</p>
                     <div class="d-grid gap-2">
-                        <button class="btn btn-danger mt-3">
+                        <button class="btn btn-danger mt-3 btn-delete">
                             Delete
                         </button>
-                        <button class="btn btn-primary mt-3">
+                        <button class="btn btn-primary mt-3 btn-back">
                             Back
                         </button>
                     </div>

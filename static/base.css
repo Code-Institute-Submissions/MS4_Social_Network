@@ -4,39 +4,38 @@
 body {
     font-family: 'Orbitron';
     background: rgb(100,65,165);
-    background: linear-gradient(90deg, rgba(100,65,165,1) 0%, rgba(42,8,69,1) 100%);
+    background: linear-gradient(90deg, rgb(116, 26, 26) 0%, rgba(42,8,69,1) 100%);
     color: white;
 }
 
-.btn-cancel {
+.btn-cancel, .btn-delete {
     background-color: rgba(220, 17, 1, 0.16);
     box-shadow: 0px 0px 2px #ff0303;
     color: #ff0303;
     text-shadow: 2px 1px #00040a;
+    border: 0;
 }
 
-.btn-cancel:hover {
+.btn-cancel:hover, .btn-delete:hover {
     background-color: rgba(220, 17, 1, 0.33);
     transition: 0.5s;
     color: white;
 }
 
-.btn-dark, .btn-light, .btn-success, .btn-primary {
+.btn-success, .btn-primary, .btn-back  {
     background-color: rgba(7, 149, 66, 0.3);
     box-shadow: 0px 0px 2px #259c08;
     color: #0ad406;
-    text-shadow: 2px 1px #00040a;
     border-color: transparent;
     text-decoration: none;
 }
 
-.btn-dark:hover, .btn-light:hover, .btn-success:hover, .btn-primary:hover {
+.btn-success:hover, .btn-primary:hover, .btn-back:hover {
     background-color: rgba(7, 149, 66, 0.35);
     transition: 0.5s;
     border-color: transparent;
     color: white;
 }
-
 
 .msg-container {
     font-size: 2em;
@@ -59,7 +58,6 @@ body {
 
 .card {
     color: black;
-    padding: 0 1em 1em 1em;
 }
 
 .card-body {
@@ -79,13 +77,17 @@ body {
     margin: 0.5em 0;
 }
 
-.edit_delete_btn {
+.edit_delete_btn, .comment_delete_btn {
     position: absolute;
     align-self: flex-end;
 }
 
-.edit_delete_btn i {
+.edit_delete_btn i, .comment_delete_btn i {
     padding: 0.3em;
+}
+
+.comment_delete_btn i {
+    padding: 0.8em;
 }
 
 .landing-img {
@@ -103,7 +105,7 @@ body {
     margin-left: 20%;
     margin-right: 20%;
     border: 1px solid black;
-    background-color: rgba(255, 255, 255, 0.65);
+    background-color: rgba(0, 0, 0, 0.65);
 }
 
 /* On screens that are 992px or less, set the background color to blue */
