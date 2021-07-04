@@ -28,27 +28,29 @@ I got the Inspiration from 9gag and twitter to build a social network app for ga
 
 ## User Experiance (UX)
 
+The aimed user group for the GameWork website will be gamers that wants to share thoughts and opinions of games with other gamers. 
+
 ## User stories
 
 *  First Time Visitor Goals
 
     * As a First Time Visitor, I want to easily navigate through the website be able to easily access all of its features.
-    * As a First Time Visitor, I want to be able to immediately see what the website is about.
-    * As a First Time Visitor, I want to be able to create an account.
-    * As a First Time Visitor, I want to be able to follow other users.
-    * As a First Time Visitor, I want to be able to post images and posts.
+    * As a First Time Visitor, I want to be able to create an account easily.
+    * As a First Time Visitor, I want to be able to easily find posts and other users.
+    * As a First Time Visitor, I want to be able to post images and texts.
 
 * Returning Visitor Goals
     * As a Returning Visitor, I want to be able to log in easily.
     * As a Returning Visitor, I want to easily look trough my feed for posts.
-    * As a Returning Visitor, I want to update my profile with images and information.
+    * As a Frequent Visitor, I want a the possibility to edit or delete my posts or comments.
+    * As a Frequent Visitor, I want a profile page that I can edit.
     * As a returning user, I want to be able to log out when I am done.
 
 *  Frequent User Goals
-    * As a Frequent Visitor, I want to make sure that an admin that can reach my notes and make changes if I for some reason cannot.
-    * As a Frequent Visitor, I want a profile page that I can edit.
-    * As a Frequent Visitor, I want to be able to easily see contact information.
-    * As a Frequent Visitor, I want to be able to donate.
+    * As a Frequent Visitor, I want an admin that can sort out posts or profiles that needs to removed for whatever reason.
+    * As a Frequent Visitor, I want to be able to see contact information for the websites creator.
+    * As a Frequent Visitor, I want to be able to contribute to the growth of the website via donations.
+    * As a Frequent Visitor, I want to be able to donate via a secure channel.
 
 
 ## Features
@@ -60,6 +62,7 @@ I got the Inspiration from 9gag and twitter to build a social network app for ga
     * Design
         * An attractive and simple layout.
         * Simple navigation throughout the website by using the navigation bar.
+        * Colors and fonts was chosen to inspire from an retro game design
     
     * General
         * A email for people to contact me.
@@ -73,7 +76,7 @@ I got the Inspiration from 9gag and twitter to build a social network app for ga
     * Feature ideas to Implement
         * The user can delete their profile.
         * The user can send DMs.
-        * The user can upload multiply images.
+        * The user can upload multiple images.
         * The user can share other users posts.
         * The user can tag other users in posts.
         * Error handling required for instances where usher visits an unavailable page
@@ -84,52 +87,52 @@ I got the Inspiration from 9gag and twitter to build a social network app for ga
 
 ##  First Time Visitor Goals
 
-* As a First Time Visitor, I want to easily understand the main purpose of the site
-    - The name of the website is called "GameWork". Indicitaing that this is website is a social media page.
-    - The background image for the whole page is of a workspace with a headline reading: "Keep an eye on what you should do". This is to signal visitors that the purpose of this site is to centralise and observe ones tasks.
-* As a First Time Visitor, I want to be able to easily navigate throughout the site to find content.
-    - At the top of the page there is a navigation bar, each link describes what the page contents of.
-    - If the user feels lost, he/she can always press on the "Home" link in the navigation bar or the "NB" icon to be redirected the homepage.
-    - When there is content below the visible page there is a pulsating arrow pointing downwards to indicate there is more to show on this page.
-* As a First Time Visitor, I want to be able to visit the website on every device, so that I can look at the website on desktop, mobile and tablet.
-    - The website is responsive on mobile, tablet and desktop.
-* As a First Time Visitor, I want to it to be easy to register as a new user.
-    - For first time users, or users who hasn't yet logged in, there is only three options in the top navigation bar; Home, Log in and Register. There is also a log in and reigster link in the center of the homepage.
-* As a First Time Visitor, I want to get a professional presentation of the site with no or very little bugs.
-    - I've done a lot of bug testing to make sure that the user is left with a site that is well-working.
-    - I went for a clean look that doesn't contain irrelevant information or annoying colors and images.
+* As a First Time Visitor, I want to easily navigate through the website be able to easily access all of its features.
+    - The website has a navigation bar at the top that is based on icons to represent each section (Feed, Profile, Donation, Sign-out).
+    - If you hover over each icon there is also text to clarify what the section contains. By clicking on one of these you are redirected to the chosen page.
+* As a First Time Visitor, I want to be able to create an account easily.
+    - If you are a new user that hasn't logged in, the first page you will be directed into is a login or reigster page.
+* As a First Time Visitor, I want to be able to easily find posts and other users.
+    - There is a search bar in the top that has a placeholder that says: "search for gamers". By searching for usernames here you can find and follow the searched user.
+    - By clicking the "Feed" icon in the navbar or the GameWork icon you are directed to the post feed that shows all the posts of the people you follow.
+* As a First Time Visitor, I want to be able to post images and texts.
+    - In the feed section's top there is an input field that allows the user to create a text and inserting an image. By clicking the button bellow that says "post" the text and/or the image is posted.
 
 ## Returning Visitor Goals
 
-* As a Returning Visitor, I want to be able to edit, delete and create notes.
-    - Notes can easily be created via a page that is reachable from the top navigation bar, called "new note". Here users can set note "name", description, due date and if it's urgent.
-    - Each note can be edited or deleted by opening the note via the "notes" page. 
-* As a Returning Visitor, I want to know if a note is urgent or not.
-    - Each note has the possibility to enable an urgent mark to indicate that this particular note needs to be adressed very soon. The urgent mark will show next to note without having to open it.
-* As a Returning Visitor, I want to find the best way to get in contact with the organisation with any questions I may have.
-    - At the bottom of the homepage there is contact form which the user can use to get in contact with the creator of the page.
+* Returning Visitor Goals
+    * As a Returning Visitor, I want to be able to log in easily.
+        - If you are a user that hasn't logged out your previous session and opens the website, you will go directly into the feed section. Bypassing the login or register page.
+    * As a Returning Visitor, I want to easily look trough my feed for posts.
+        - The feed section that contains all the posts has an infinity scroll that is based on the date and time the post was created. Meaning that all the newest posts are at the top. 
+    * As a Frequent Visitor, I want a the possibility to edit or delete my posts or comments.
+        - On each post or comment that yourself has created, there is an edit and a delete function at the top right corner. 
+    * As a Frequent Visitor, I want a profile page that I can edit.
+        - Each user are assigned a profile which they can edit the profile image, date of birth, location and a small biography.
+    * As a returning user, I want to be able to log out when I am done.
+        - In the navbar there is an icon that says "sign-out", located at the far right. By clicking this you are redirected to a new page to confirm the logout. 
 
 ##  Frequent User Goals
 
-* As a Frequent Visitor, I want to make sure that an admin that can reach my notes and make changes if I for some reason cannot.
-    - There is a Admin login that holds all notes created. Here he or she can edit or remove every single note.
-* As a Frequent Visitor, I want a profile page that I can edit.
-    - There is a profile page that in the future could hold an image as a profile picture.
-* As a Frequent Visitor, I want to find community links so that I can join and interact with others.
-    - The Facebook, Instagram and Twitter page can be found at the bottom of the homepage. The community links is not enabled since there is no community yet.
+*  Frequent User Goals
+    * As a Frequent Visitor, I want an admin that can sort out posts or profiles that needs to removed for whatever reason.
+        - Django has an Super user function that allows the creator to have full access to all posts and profiles. By using this the creator can delete or edit any posts or profiles.
+    * As a Frequent Visitor, I want to be able to see contact information for the websites creator.
+        - On the donations section there is contact information in the bottom of the page. 
+    * As a Frequent Visitor, I want to be able to contribute to the growth of the website via donations.
+        - By visiting the donations section, you are presented with three options of donation amounts. By clicking on one you are redirected to a payment page that requires you card info to complete the payment. 
+    * As a Frequent Visitor, I want to be able to donate via a secure channel.
+        - All donation payments are handled via Stripe. A well known payment system. This system also encrypts your payment details.
 
 ## Here is some examples of bugs that I encounterd during testing:
 
 
-#### This is a selection of screenshots of bugs that are now fixed.
-
-* In this first picture the urgent text and icon was not aligned with the rest. This happened only on smaller screens. By making the form wider and setting the font-size to a smaller one, the aligment issue was fixed. 
+* There was an issue with Stripe Payments. When sending up an POST request to the stripe servers I was left with an 402 error. The error was described as a "invalid card number". By reading the stripe docs I found that the real issue was that I didn't create a token for the card details. I solved this issue by collecting the card details from the user inputs and sending a new request to the stripe servers to create a token for the card details. After that I collected the response into a new variable for the card details, which I then used to make a new correct POST request for the payment. 
     
 
-* In this bug the buttons for the edit screen was misplaced. The issue here was similar to the previous bug. By making the font-size smaller and shorten the "edit note" to only "edit", the buttons aligned better.
-    
+* Heruku live website programming error. Migrations was incorrect. When I pushed to heroku and open products on the live website i got an "ProgrammingError" I didn't know what to do so I googled around. tried to delete the migrations and migrate again, but it didn't work. So I took help from tutor assistant and got the help to look at Code Institutes Boutique Ado walktrough project on the deployment section. I remade the deployment to heroku and remade the migrations and after deployment it worked.
 
-* In this last bug the arrows that point downwards to indicates more space below, was too far up and merging with the nearby buttons. This was also an issue that was only found in smaller screens. By adding a top margin in css the arrows was properly placed.
+* In live mode after pushing to heroku it didn't load any images. The problem was syntax error, the problem was solved by adding {{ MEDIA_URL }} to the hrefs.
     
 
 ---
@@ -210,6 +213,7 @@ DB Image:
 ---
 
 ## Deployment
+
 --- 
 
 ### Requirements
