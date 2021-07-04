@@ -4,6 +4,11 @@
 
 [View the live project here](https://ms4-social-network.herokuapp.com/)
 
+# Inspiration
+
+I got the Inspiration from 9gag and twitter to build a social network app for gamers, like forum for gamers. For users to post funny images or maby something funny that happend ingame.
+
+
 ---
 
 # Table of contents
@@ -27,21 +32,23 @@
 
 *  First Time Visitor Goals
 
-    * As a First Time Visitor, I want to easily understand the main purpose of the site.
-    * As a First Time Visitor, I want to be able to easily navigate throughout the site to find content.
-    * As a First Time Visitor, I want to be able to visit the website on every device, so that I can look at the website on desktop, mobile and tablet.
-    * As a First Time Visitor, I want to it to be easy to register as a new user.
-    * As a First Time Visitor, I want to get a professional presentation of the site with no or very little bugs.
+    * As a First Time Visitor, I want to easily navigate through the website be able to easily access all of its features.
+    * As a First Time Visitor, I want to be able to immediately see what the website is about.
+    * As a First Time Visitor, I want to be able to create an account.
+    * As a First Time Visitor, I want to be able to follow other users.
+    * As a First Time Visitor, I want to be able to post images and posts.
 
 * Returning Visitor Goals
-    * As a Returning Visitor, I want to be able to edit, delete and create notes.
-    * As a Returning Visitor, I want to know if a note is urgent or not.
-    * As a Returning Visitor, I want to find the best way to get in contact with the creator with any questions I may have.
+    * As a Returning Visitor, I want to be able to log in easily.
+    * As a Returning Visitor, I want to easily look trough my feed for posts.
+    * As a Returning Visitor, I want to update my profile with images and information.
+    * As a returning user, I want to be able to log out when I am done.
 
 *  Frequent User Goals
     * As a Frequent Visitor, I want to make sure that an admin that can reach my notes and make changes if I for some reason cannot.
     * As a Frequent Visitor, I want a profile page that I can edit.
-    * As a Frequent Visitor, I want to find community links so that I can join and interact with others.
+    * As a Frequent Visitor, I want to be able to easily see contact information.
+    * As a Frequent Visitor, I want to be able to donate.
 
 
 ## Features
@@ -55,21 +62,21 @@
         * Simple navigation throughout the website by using the navigation bar.
     
     * General
-        * There are links to the social media platforms at the bottom of the website.
-        * A contactform for people to contact me.
+        * A email for people to contact me.
     
     * Register, login and logout
         * User can create a new account on the web application.
         * User can login with their existing accounts.
         * User can easily log out.
         * If a user creates a new account, logs in or logs out, a flashed message will appear with the action the person has done.
-        * The password is saved in mongo db with a random password generated which make the password secury for the user.
 
     * Feature ideas to Implement
         * The user can delete their profile.
-        * Display a nice profile page for the user.
-        * Make a calender that you can put the notes in.
-        * Make a public switch so you can choose if you want your notes to be public or private.
+        * The user can send DMs.
+        * The user can upload multiply images.
+        * The user can share other users posts.
+        * The user can tag other users in posts.
+        * Error handling required for instances where usher visits an unavailable page
 
 ---
 
@@ -78,7 +85,7 @@
 ##  First Time Visitor Goals
 
 * As a First Time Visitor, I want to easily understand the main purpose of the site
-    - The name of the website is called "notebook". Indicitaing that this is website is about keeping notes.
+    - The name of the website is called "GameWork". Indicitaing that this is website is a social media page.
     - The background image for the whole page is of a workspace with a headline reading: "Keep an eye on what you should do". This is to signal visitors that the purpose of this site is to centralise and observe ones tasks.
 * As a First Time Visitor, I want to be able to easily navigate throughout the site to find content.
     - At the top of the page there is a navigation bar, each link describes what the page contents of.
@@ -117,13 +124,13 @@
 #### This is a selection of screenshots of bugs that are now fixed.
 
 * In this first picture the urgent text and icon was not aligned with the rest. This happened only on smaller screens. By making the form wider and setting the font-size to a smaller one, the aligment issue was fixed. 
-    * Screenshot of Bug1 - [View](static/files/bugs/Screen1.jpg)
+    
 
 * In this bug the buttons for the edit screen was misplaced. The issue here was similar to the previous bug. By making the font-size smaller and shorten the "edit note" to only "edit", the buttons aligned better.
-    * Screenshot of Bug2 - [View](static/files/bugs/Screen2.jpg)
+    
 
 * In this last bug the arrows that point downwards to indicates more space below, was too far up and merging with the nearby buttons. This was also an issue that was only found in smaller screens. By adding a top margin in css the arrows was properly placed.
-    * Screenshot of Bug3 - [View](static/files/bugs/Screen3.jpg)
+    
 
 ---
 
@@ -170,10 +177,10 @@ Other:
     * Imagery is important. The large, background hero image is designed to be striking and catch the user's attention. It also has a modern, energetic aesthetic.
 
 * #### Wireframes
-    * Wireframe Landing Page - [View]()
-    * Wireframe Post list and Post detail - [View]()
-    * Wireframe Profile page - [View]()
-    * Wireframe Donation - [View]()
+    * Wireframe Landing Page - [View](media/Wireframes/LandingPageWF.png)
+    * Wireframe Post list - [View](media/Wireframes/PostListPage.png)
+    * Wireframe Profile page - [View](media/Wireframes/ProfilePage.png)
+    * Wireframe Donation - [View](media/Wireframes/DonationPage.png)
 
 
 ---
