@@ -6,8 +6,7 @@
 
 # Inspiration
 
-I got the Inspiration from 9gag and twitter to build a social network app for gamers, like forum for gamers. For users to post funny images or maby something funny that happend ingame.
-
+I got the Inspiration from 9gag and Twitter to build a social network app for gamers, sort of like a forum for gamers. Made for users to post texts and images about games.
 
 ---
 
@@ -26,29 +25,29 @@ I got the Inspiration from 9gag and twitter to build a social network app for ga
 
 ---
 
-## User Experiance (UX)
+## User Experience (UX)
 
-The aimed user group for the GameWork website will be gamers that wants to share thoughts and opinions of games with other gamers. 
+The target group for the GameWork website will be gamers that wants to share thoughts and opinions of games with other gamers. 
 
 ## User stories
 
 *  First Time Visitor Goals
 
-    * As a First Time Visitor, I want to easily navigate through the website be able to easily access all of its features.
-    * As a First Time Visitor, I want to be able to create an account easily.
+    * As a First Time Visitor, I want to easily navigate through the website be able to access all of its features.
+    * As a First Time Visitor, I want to be able to easily create an account.
     * As a First Time Visitor, I want to be able to easily find posts and other users.
     * As a First Time Visitor, I want to be able to post images and texts.
 
 * Returning Visitor Goals
-    * As a Returning Visitor, I want to be able to log in easily.
+    * As a Returning Visitor, I want to be able to easily log in.
     * As a Returning Visitor, I want to easily look trough my feed for posts.
-    * As a Frequent Visitor, I want a the possibility to edit or delete my posts or comments.
+    * As a Frequent Visitor, I want the possibility to edit or delete my posts or comments.
     * As a Frequent Visitor, I want a profile page that I can edit.
     * As a returning user, I want to be able to log out when I am done.
 
 *  Frequent User Goals
     * As a Frequent Visitor, I want an admin that can sort out posts or profiles that needs to removed for whatever reason.
-    * As a Frequent Visitor, I want to be able to see contact information for the websites creator.
+    * As a Frequent Visitor, I want to see contact information for someone responsible of the website.
     * As a Frequent Visitor, I want to be able to contribute to the growth of the website via donations.
     * As a Frequent Visitor, I want to be able to donate via a secure channel.
 
@@ -62,10 +61,14 @@ The aimed user group for the GameWork website will be gamers that wants to share
     * Design
         * An attractive and simple layout.
         * Simple navigation throughout the website by using the navigation bar.
-        * Colors and fonts was chosen to inspire from an retro game design
+        * Colors and fonts was inspired by retro game design.
     
     * General
         * A email for people to contact me.
+        * Ability to donate via a donation page.
+        * Users can add text and images via posts.
+        * Users can search for existing users.
+        * Users can add information about themselves in their profile page.
     
     * Register, login and logout
         * User can create a new account on the web application.
@@ -117,7 +120,7 @@ The aimed user group for the GameWork website will be gamers that wants to share
 *  Frequent User Goals
     * As a Frequent Visitor, I want an admin that can sort out posts or profiles that needs to removed for whatever reason.
         - Django has an Super user function that allows the creator to have full access to all posts and profiles. By using this the creator can delete or edit any posts or profiles.
-    * As a Frequent Visitor, I want to be able to see contact information for the websites creator.
+    * As a Frequent Visitor, I want to see contact information for someone responsible of the website
         - On the donations section there is contact information in the bottom of the page. 
     * As a Frequent Visitor, I want to be able to contribute to the growth of the website via donations.
         - By visiting the donations section, you are presented with three options of donation amounts. By clicking on one you are redirected to a payment page that requires you card info to complete the payment. 
@@ -130,10 +133,9 @@ The aimed user group for the GameWork website will be gamers that wants to share
 * There was an issue with Stripe Payments. When sending up an POST request to the stripe servers I was left with an 402 error. The error was described as a "invalid card number". By reading the stripe docs I found that the real issue was that I didn't create a token for the card details. I solved this issue by collecting the card details from the user inputs and sending a new request to the stripe servers to create a token for the card details. After that I collected the response into a new variable for the card details, which I then used to make a new correct POST request for the payment. 
     
 
-* Heruku live website programming error. Migrations was incorrect. When I pushed to heroku and open products on the live website i got an "ProgrammingError" I didn't know what to do so I googled around. tried to delete the migrations and migrate again, but it didn't work. So I took help from tutor assistant and got the help to look at Code Institutes Boutique Ado walktrough project on the deployment section. I remade the deployment to heroku and remade the migrations and after deployment it worked.
+* Heroku live website error. Migrations was incorrect. When I pushed to Heroku and opened products on the live website I got an "Programming Error" I didn't know what to do so I googled around. I tried to delete the migrations and migrate again, but it didn't work. So I took help from tutor assistant and was asked to look at Code Institutes Boutique Ado walktrough project on the deployment section. I remade the deployment to Heroku and remade the migrations and after deployment that it worked.
 
-* In live mode after pushing to heroku it didn't load any images. The problem was syntax error, the problem was solved by adding {{ MEDIA_URL }} to the hrefs.
-    
+* In live mode after pushing to Heroku it didn't load any images. The problem was syntax error. The problem was solved by adding {{ MEDIA_URL }} to the hrefs of all the images.
 
 ---
 
@@ -171,7 +173,7 @@ Other:
 ### Design
 
 * #### Colour Scheme
-    * The color i used for background is a gradient, black and blue.
+    * The colors I used for background is a gradient, red rgb(116, 26, 26) and blue rgba(42,8,69,1). The message alert is orange rgb(255, 177, 3) and and buttons are either green rgb(10, 212, 6) or red rgb(255, 3, 3).
 
 * #### Typography
     * The Orbitron font is the main font used throughout the whole website.
@@ -203,6 +205,7 @@ DB Image:
 ### My methods for testing my webpage consisted of:
 
 * Chrome DevTools is used to detect problems and test responsiveness.
+* I was helped by friends and family in testing the websites navigation and user friendliness.
 * W3C Markup Validation Service
     * The W3C Markup Validation Service is used to check whether there were any errors in the HTML5 code.
 * W3C CSS validator
