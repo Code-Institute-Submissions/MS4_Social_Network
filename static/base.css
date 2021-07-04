@@ -12,6 +12,35 @@ input {
     font-size: 10px;
 }
 
+.navbar-brand span {
+    font-size: 1.3em;
+    color: white;
+}
+
+.nav-tabs a {
+    font-size: 25px;
+}
+
+.landing-img {
+    height: 100vh;
+    width: 100%;
+    background-repeat: no-repeat;
+    top: 0;
+    position: absolute;
+    z-index: -1;
+    filter: blur(2px);
+}
+
+.index-text {
+    position: relative;
+    margin-left: 20%;
+    margin-right: 20%;
+    border: 1px solid black;
+    background-color: rgba(0, 0, 0, 0.65);
+}
+
+/* buttons */
+
 .btn-cancel, .btn-delete {
     background-color: rgba(220, 17, 1, 0.16);
     box-shadow: 0px 0px 2px #ff0303;
@@ -19,10 +48,6 @@ input {
     text-shadow: 2px 1px #00040a;
     border: 0;
 }
-
-.active {
-    color: #2EBDD1;
-  }
 
 .btn-cancel:hover, .btn-delete:hover {
     background-color: rgba(220, 17, 1, 0.33);
@@ -45,42 +70,6 @@ input {
     color: white;
 }
 
-.msg-container {
-    font-size: 2em;
-    font-weight: bold;
-    background-color: rgba(220, 128, 1, 0.16);
-    box-shadow: 0px 0px 2px #ffb103;
-    color: #ffb103;
-    text-shadow: 2px 1px #00040a;
-}
-
-.navbar-brand span {
-    font-size: 1.3em;
-    color: white;
-}
-#profile-card {
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-}
-
-.card {
-    padding-bottom: 0.5em;
-}
-
-.card, .card-body, .card-footer {
-    color: black;
-}
-
-.post-card {
-    display: flex;
-    flex-direction: column;
-}
-
-#div_id_image label {
-    margin: 0.5em 0;
-}
-
 .edit_delete_btn, .comment_delete_btn {
     position: absolute;
     align-self: flex-end;
@@ -92,71 +81,6 @@ input {
 
 .comment_delete_btn i {
     padding: 0.8em;
-}
-
-.landing-img {
-    height: 100vh;
-    width: 100%;
-    background-repeat: no-repeat;
-    top: 0;
-    position: absolute;
-    z-index: -1;
-    filter: blur(2px);
-}
-
-.index-text {
-    position: relative;
-    margin-left: 20%;
-    margin-right: 20%;
-    border: 1px solid black;
-    background-color: rgba(0, 0, 0, 0.65);
-}
-
-/* On screens that are 992px or less */
-@media screen and (max-width: 992px) {
-
-body {
-    padding: em 0;
-}
-
-.container-fluid {
-    display: flex;
-    flex-direction: column;
-}
-
-.nav {
-    margin-bottom: 1em;
-}
-
-.index-text {
-    margin-left: 5%;
-    margin-right: 5%;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-    .container-fluid {
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .nav {
-        margin-bottom: 1em;
-    }
-}
-
-
-@media screen and (max-width: 1439px) {
-    #chess-success {
-        width: 300px;
-        height: 200px;
-    }
-}
-
-/* post_list.hmtl */
-
-.post-body-text {
-    font-size: 26px;
 }
 
 .remove-default-btn i {
@@ -173,50 +97,39 @@ body {
     display: inline-block;
 }
 
-.rating-area .count {
-    margin: 0 1em 0 0.6em;
-    font-size: 0.8em;
-    font-family: 'Orbitron';
+/* info alert box */
+
+.msg-container {
+    font-size: 2em;
+    font-weight: bold;
+    background-color: rgba(220, 128, 1, 0.16);
+    box-shadow: 0px 0px 2px #ffb103;
+    color: #ffb103;
+    text-shadow: 2px 1px #00040a;
 }
 
-.rating-area {
+/* post and cards */
+
+#profile-card {
     display: flex;
-    justify-content: center;
-    flex-direction: row;
+    flex-flow: column;
     align-items: center;
-    font-size: 0.9em;
 }
 
-.transition-fast{
-    transition:0.2s ease-out;
+.post-card {
+    display: flex;
+    flex-direction: column;
 }
 
-.thumbs-up-circle, .thumbs-down-circle {
-    width:40px;
-    height:40px;
-    border-radius:50%;
-    box-shadow:1px 1px 0px rgba(0,0,0,0.2);
-    cursor:pointer;
-    margin-bottom:5px;
-    margin-top:5px;
-    background-color: transparent;
-    border: 1px solid grey;
+.post-image {
+    max-width: 100%;
+    height: auto;
+    border-radius: 10px;
+    margin-bottom: 10px;
 }
 
-.thumbs-up-circle:hover, .thumbs-down-circle:hover{
-     box-shadow:1px 1px 4px rgba(0,0,0,0.5);
-}
-
-.thumbs-up-circle:hover .thumbs-up{
-    transform:rotate(-5deg) translate(0px, -1px);
-}
- 
-.thumbs-up-circle:hover .thumbs-down{
-    transform:rotate(5deg) translate(0px, 1px);
-}
-
-.comment-icon-area {
-    margin-left: 1em;
+.post-body-text {
+    font-size: 26px;
 }
 
 .edit-color {
@@ -246,29 +159,92 @@ body {
     margin-right: 1rem;
 }
 
-
-/* profile.hmtl */
-
-
-
-/* comment on comment */
-
 .child-comment {
     margin-left: 2rem;
 }
 
-.post-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 10px;
-    margin-bottom: 10px;
+.comment-icon-area {
+    margin-left: 1em;
 }
 
-/* Post Image */
-
-.nav-tabs a {
-    font-size: 25px;
+.card {
+    padding-bottom: 0.5em;
 }
 
+.card, .card-body, .card-footer {
+    color: black;
+}
 
+/* rating thumbs from codepen link in README */
 
+.rating-area {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    font-size: 0.9em;
+}
+
+.rating-area .count {
+    margin: 0 1em 0 0.6em;
+    font-size: 0.8em;
+    font-family: 'Orbitron';
+}
+
+.thumbs-up-circle, .thumbs-down-circle {
+    width:40px;
+    height:40px;
+    border-radius:50%;
+    box-shadow:1px 1px 0px rgba(0,0,0,0.2);
+    cursor:pointer;
+    margin-bottom:5px;
+    margin-top:5px;
+    background-color: transparent;
+    border: 1px solid grey;
+}
+
+.thumbs-up-circle:hover, .thumbs-down-circle:hover{
+    box-shadow:1px 1px 4px rgba(0,0,0,0.5);
+}
+ 
+/* On screens that are 992px or less */
+@media screen and (max-width: 992px) {
+
+body {
+    padding: em 0;
+}
+
+.container-fluid {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav {
+    margin-bottom: 1em;
+}
+
+.index-text {
+    margin-left: 5%;
+    margin-right: 5%;
+    }
+}
+
+/* On screens that are 1024px or less */
+@media screen and (max-width: 1024px) {
+    .container-fluid {
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .nav {
+        margin-bottom: 1em;
+    }
+}
+
+/* On screens that are 1439px or less */
+@media screen and (max-width: 1439px) {
+    #chess-success {
+        width: 300px;
+        height: 200px;
+    }
+}
