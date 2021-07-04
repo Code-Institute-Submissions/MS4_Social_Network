@@ -26,8 +26,7 @@ This site was was tested on multiple browsers (Google Chrome and Safari), multip
 | Clicking on `Profile` link | Opens Profile page | As expected | Pass |
 | Clicking on `Donation` link | Opens Donation page | As expected | Pass |
 | Clicking on `Sign-out` link | Opens sign out page and then signs out | As expected | Pass |
-| Clicking on `log Out` link | Logs out user and redirects to log in page | As expected | Pass |
-| Clicking on `Register` link | Opens register page and the user can register an account | As expected | Pass |
+
 
 ## Feed
 
@@ -45,7 +44,7 @@ This site was was tested on multiple browsers (Google Chrome and Safari), multip
 | Functionality | Expected Outcome | Actual Outcome | Pass/Fail |
 | :-------------: |:----------------:| :--------------: | :---------: |
 | Show donations | List all donations | As Expected | Pass
-| Clicking on donation | redirect to checkout page | As Expected | Pass
+| Clicking on donation | redirect to donation page | As Expected | Pass
 
 
 ## Checkout
