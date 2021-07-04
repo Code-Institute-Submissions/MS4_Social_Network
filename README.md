@@ -432,6 +432,8 @@ AWS is a cloud based storage service, used to store static files and images:
     * [Link - Codepen](https://codepen.io/uiswarup/pen/RwNraeW)
 * For my like and dislike buttons i used this design that i found on codepen
     * [Link - Codepen](https://codepen.io/Kallissien/pen/mwmvWd)
+* To generate my DB schema i used this site
+    * [Link - Dreampuf](https://dreampuf.github.io/GraphvizOnline/)
 
 
 ## Acknowledgements
