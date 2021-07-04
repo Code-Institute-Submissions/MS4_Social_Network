@@ -1,6 +1,6 @@
 # MS4-PROJECT-GameWork
 
-![alternativetext]()
+![alternativetext](media/devices_img/devicesMs4.png)
 
 [View the live project here](https://ms4-social-network.herokuapp.com/)
 
