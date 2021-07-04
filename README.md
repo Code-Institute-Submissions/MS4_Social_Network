@@ -198,6 +198,8 @@ DB Image:
 
 # Testing
 
+**Testing section is located [here](testing.md)**
+
 ### My methods for testing my webpage consisted of:
 
 * Chrome DevTools is used to detect problems and test responsiveness.
