@@ -212,7 +212,6 @@ body {
 }
  
 .thumbs-up-circle:hover .thumbs-down{
-    color:#565656;
     transform:rotate(5deg) translate(0px, 1px);
 }
 

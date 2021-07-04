@@ -129,12 +129,34 @@
 
 # Technologies
 
-### Languages Used
-* [HTML5](https://sv.wikipedia.org/wiki/HTML5)
-* [CSS3](https://en.wikipedia.org/wiki/CSS)
-* [JQuery](https://sv.wikipedia.org/wiki/JQuery)
-* [Python](https://en.wikipedia.org/wiki/Python_(programming_language))
-* [Django](https://en.wikipedia.org/wiki/Django_(web_framework)))
+## Technologies Used
+
+Languages:
+- 	HTML5
+-	CSS3
+-	Javascript
+-	Python 
+
+Frameworks:
+- 	Django
+-   Bootstrap 5
+-   Jquery
+
+Storing/editing/deploying Code:
+-	Gitpod
+-	Github
+-   Heroku
+
+Storage/Database:
+-   Amazon Web Services (to store static/image files)
+- 	Heroku Postgres (for database)
+
+Payment Handling:
+- 	Stripe (for facilitating payments)
+
+Other:
+-   Google Fonts
+- 	Font Awesome
 
 ### Design
 
@@ -153,36 +175,14 @@
     * Wireframe Profile page - [View]()
     * Wireframe Donation - [View]()
 
-### Frameworks, Libraries & Programs Used
-
-* Bootstrap 5:
-    * Bootstrap 5 was used to assist with the responsiveness and styling of the website.
-* Photoshop:
-    * Photoshop was used to create the picture on the devices.
-* Google Fonts:
-    * Google fonts were used to import the 'Montserrat' font into the style.css file which is used on all pages throughout the project.
-* GitHub:
-    * GitHub is used to store the projects code after being pushed from Git.
-* Git:
-    * Git was used for version control by utilizing the Gitpod terminal to commit to Git and Push to GitHub.
-* Gitpod:
-    * GitPod is used to develop the project.
-* AWS:
-    * AWS is the fully managed cloud database service used for the project.
-* Heroku:
-    * Heroki is the platform to deploying the app.
-* Django:
-    * Django is the web framework used to provide libraries, tools and technologies for the app.
-
 
 ---
 
 ## DB Schema
 
-Generate DB Image:
+DB Image:
 
-`python manage.py graph_models -a > dotfile.dot`
-[https://medium.com/@yathomasi1/1-using-django-extensions-to-visualize-the-database-diagram-in-django-application-c5fa7e710e16]()
+![Picture25a](media/readme-image/graphviz.png)
 
 ---
 
@@ -204,85 +204,235 @@ Generate DB Image:
 
 ## Deployment
 --- 
+
 ### Requirements
 * Python3
 * Github account
 * AWS account
 * Heroku account
 
-### Clone the project
-To make a local clone, follow the steps:
 
-1. Log in to GitHub and go to the repository.
-2. Click on the green button with the text “Code”.
-3. Click on “Open with GitHub Desktop” and follow the prompts in the GitHub Desktop Application or follow the instructions from [this link](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/cloning-a-repository#cloning-a-repository-to-github-desktop) to see how to clone the repository in other ways.
+_Github_
 
-### Working with the local copy
+The source code for this site is in GitHub.
 
-1. Install all the requirements: Go to the workspace of your local copy. In the terminal window of your IDE type: pip3 install -r requirements.txt.
-2. Create a database in MongoDB
-    * Signup or login to your MongoDB account.
-    * Create a cluster and a database.
-    * Create four collections in the db: categories, recipes, subscribers, users.
-    * Add string values for the collections.
-3. Create the environment variables
-    * Create a .gitignore file in the root directory of the project.
-    * Add the env.py file in the .gitignore.
-    * Create the file env.py. This will contain all the envornment variables.
+To clone the code from GitHub:
+
+1.	On GitHub, navigate to the main page of the repository.
+2.	Above the list of files, click Code.
+3.	To clone the repository using HTTPS, click HTTPS under "Clone".
+4.	Open Git Bash.
+5.	Change the current working directory to the location where you want the cloned directory.
+6.	Type git clone, and then paste the URL you copied earlier:
+    ```$ git clone https://github.com/YOUR-USERNAME/MS4_KeepRolling.git```
+7.	Press Enter to create your local clone.
+8.  Create your own env.py file to store variables, and ensure this is listed in your .gitignore file to keep these from being displayed publicly.
+
+_Deployment to Heroku_
+
+Heroku is used to deploy the app:
+
+1.	When logged into your account, create new app:
+    ![Picture1](media/readme-image/Picture1.png)
+
+2.	Choose app name and your closest region:
+
+	![Picture2](media/readme-image/Picture2.png) 
+
+3.	On Resources tab, provision Heroku Postgres (use the free plan):
+
+    ![Picture3](media/readme-image/Picture3.png) 
+	 
+4.	Back in gitpod, install the following via these commands:
+	 - ```pip3 install dj database url```
+	 - ```pip3 install psycopg2 binary```
+
+5.	Freeze the requirements so this is updated in the requirements.txt file to make sure Heroku installs all apps when deployed:
+	- ```pip3 freeze > requirements.txt```
+
+6.	To get stores database setup, go to settings.py an import dj_database_url:
+
+    ![Picture6](media/readme-image/Picture6.png) 
+
+7.	Down in the databases setting, comment out default configuration and replace the default database with a call to dj_database_url.parse, and give it the database URL from Heroku in the brackets (from your config variables in your app settings tab):
+
+    ![Picture7](media/readme-image/Picture7.png) 
+
+8.	Now run all migrations again, by running:
+	- ```python 3 manage.py migrate```
+
+9.	Then create a superuser to log in with:
+	- ```python3 manage.py create superuser```
+
+10.	Back in settings.py remove the Heroku database config, and uncomment the original so our database URL doesn't end up in version control:
     
-            Import os
-            os.environ.setdefault("IP", "Added by developer")
-            os.environ.setdefault("PORT", "Added by developer")
-            os.environ.setdefault("SECRET_KEY", "Added by developer")
-            os.environ.setdefault("MONGO_URI", "Added by developer")
-            os.environ.setdefault("MONGO_DBNAME", "Added by developer")
+    ![Picture10](media/readme-image/Picture10.png) 
+
+11.	Then commit to github.
+
+12.	Use an if statement in settings.py, so when app is running on Heroku, where database URL environment variable is defined, we connect to Postgres, otherwise we connect to sqlite:
     
-4. Run the app: Open your terminal window in your IDE. Type python3 app.py and run the app.
+    ![Picture12](media/readme-image/Picture12.png) 
 
-### Heroku Deployment
+13. Install unicorn, which will act as our webserver, then freeze that into requirements.txt:
+	- ```pip3 install gunicorn```
+	- ```pip3 freeze > requirements.txt```
 
-1. Set up local workspace for Heroku
-    * In terminal window of your IDE type: pip3 freeze -- local > requirements.txt. (The file is needed for Heroku to know which filed to install.)
-    * In termial window of your IDE type: python app.py > Procfile (The file is needed for Heroku to know which file is needed as entry point.)
-2. Set up Heroku: create a Heroku account and create a new app and select your region.
-3. Deployment method 'Github'
-    * Click on the Connect to GitHub section in the deploy tab in Heroku.
-        * Search your repository to connect with it.
-        * When your repository appears click on connect to connect your repository with the Heroku.
-    * Go to the settings app in Heroku and go to Config Vars. Click on Reveal Config Vars.
-        * Enter the variables contained in your env.py file. it is about: IP, PORT, SECRET_KEY, MONGO_URI, MONGO_DBNAME
-4. Push the requirements.txt and Procfile to repository.
+14.	Now create Procfile, and enter the following to tell Heroku to create a web dyno, which will run unicorn and serve our django app:
+	```web: gunicorn APP_NAME.wsgi:application```
 
-        $ git add requirements.txt
-        $ git commit -m "Add requirements.txt"
+15.	Temporarily disable collectstatic:
+    
+    ![Picture15](media/readme-image/Picture15.png) 
 
-        $ git add Procfile 
-        $ git commit -m "Add Procfile"
-5. Automatic deployment: Go to the deploy tab in Heroku and scroll down to Aotmatic deployments. Click on Enable Automatic Deploys. By Manual deploy click on Deploy Branch.
+16.	Add the hostname of our Heroku app to allowed hosts in settings.py, add localhost aswell:
+	ALLOWED_HOSTS = ['YOUR-APP-NAME.herokuapp.com', 'localhost']
 
-- Heroku will receive the code from Github and host the app using the required packages. Click on Open app in the right corner of your Heroku account. The app wil open and the live link is available from the address bar.
+17.	Then add/commit changes to github.
+
+18.	To deploy to Heroku, enter (you may need to initialize your Heroku git remote if you created your app on the website rather than the CLI):
+    
+    ![Picture18](media/readme-image/Picture18.png) 
+
+19.	To automatically deploy on Heroku when we commit to github, on your Heroku dashboard go to Deploy > select Github, and search for your repository, then click Connect:
+    
+    ![Picture19](media/readme-image/Picture19.png) 
+
+20.	Click to enable automatic deploys:
+    
+    ![Picture20](media/readme-image/Picture20.png) 
+
+21.	You need a new secret key to enter in you Heroku Config Vars (you can use an online Django secret key generator to do this):
+    
+    ![Picture21](media/readme-image/Picture21.png) 
+
+22.	Now you can replace the secret key in settings.py with a call to get this from the environment:
+    
+    ![Picture22](media/readme-image/Picture22.png) 
+
+23.	Commit/push these changes to github.
+
+_AWS_
+
+AWS is a cloud based storage service, used to store static files and images:
+
+1.	After creating an AWS account (using the free version will be sufficient), access the AWS management console in your account.
+
+2.	Find s3 by searching for this in services.
+
+3.	Open s3 and create a new bucket.
+
+4.	Enter a name for your bucket/select your closest region.
+
+5.	Uncheck the block public access box, and create the bucket.
+
+6.	Once created, click on the bucket and enter the following settings:
+	-	Under Properties, turn on static website hosting
+	- 	Under Permissions, paste in the CORS configuration:
+
+	```
+        [
+ 		    {
+     		    "AllowedHeaders": [
+         		    "Authorization"
+     			    ],
+     		    "AllowedMethods": [
+       			    "GET"
+     			    ],
+     		    "AllowedOrigins": [
+         		    "*"
+     			    ],
+    		    "ExposeHeaders": []
+ 		    }
+	    ] 
+    ```
+
+    -	Go to the bucket policy tab and select, policy generator so we can create a security policy for this bucket.
+    -	The policy type is going to be s3 bucket policy, allow all principals by using a star, and the action will be, get object
+    -	Copy the ARN which stands for Amazon resource name from bucket policy tab and paste it into the ARN box here at the bottom, then click Add Statement, then click Generate Policy then copy this policy into the bucket policy editor.
+    -	Before clicking Save, because we want to allow access to all resources in this bucket, add a slash star onto the end of the resource key
+    -	Go to the access control list tab, and set the list objects permission for everyone under the Public Access section
+
+7.	With our s3 bucket ready to go. Now we need to create a user to access it. do this through another service called Iam which stands for Identity and Access Management.
+
+8.	Go back to the services menu and open Iam
+
+9.	Click groups then create a new group (keep clicking through to Create Group)
+
+10.	Create the policy used to access our bucket by clicking policies and then create policy
+
+11.	Go to the JSON tab and then select import managed policy, then search for s3 and then import the s3 full access policy
+
+12.	Get the bucket ARN from the bucket policy page in s3, and paste that in the JSON section
+
+13.	Now click review policy, give it a name and a description, and then click create policy
+
+14.	Now attach the policy to the group we created, go to groups, click manage my group, click attach policy, search for the policy we just created and select it, and click attach policy
+
+15.	Create a user to put in the group. On the user's page, I'll click add user, create a user, give them programmatic access, then select next
+
+16.	Now add user to your group. Important: Now download the CSV file which will contain this users access key and secret access key which we'll use to authenticate them from our Django app (cannot access this again so do this now)
+
+17.	To Connect Django to s3 bucket, Install 2 new packages:
+    -	```pip3 install boto3```
+    -	```pip3 install django-storages```
+
+18.	Then freeze requirements:
+    -	```pip3 freeze > requirements.txt```
+
+19.	Add ‘storages’ to installed apps on settings.py
+
+20.	To connect Django to s3 we need to add some settings in settings.py to tell it which bucket it should be communicating with:
+ 
+21.	Go to Heroku and add our AWS keys to the config variables, aswell as adding that key called USE_AWS which I'll set to true
+
+22.	Also remove the disable collectstatic variable
+
+23.	In our settings file, we need to tell django where our static files will be coming from in production
+    
+    ![Picture23a](media/readme-image/Picture23a.png) 
+
+24.	Create a file called custom storages:
+
+    ![Picture24a](media/readme-image/Picture24a.png) 
+ 
+25.	Go to settings.py, tell it that for static file storage we want to use our storage class we just created, and that the location it should save static files is a folder called static. Do the same thing for media files by using the default file storage and media files location settings
+
+    ![Picture25a](media/readme-image/Picture25a.png) 
+
+26.	Add/commit changes in github.
+
 ---
 
 # Credits
 
 ## Content
 
-* On the home page i found a nice arrow with shows the visitors that theres more content on the page when you scroll down
-    * [Link - Codepen]()
-* The background image that i have on all pages
-    * [Picture - Pixabay]()
-* On the Profile page Profile picture
-    * [Picture - Pixabay]()
-* To display error handlers pages in a nice way i choose this picture
-    * [Picture - Pixabay]()
-* The video i looked at to get it right with the error handling
-    * [Video - Youtube]()
-* Icon i use in the header
-    * [Icon - Iconfinder]()
-* The 3D text i used for the error handling page.
-    * [3D text - Codepen]()
-* I used this site to transform scss to css from the link above.
-    * [Css to Scss - Cssportal]()
+* I used Allauth for my website
+    * [Link - Github](https://github.com/pennersr/django-allauth)
+* A big thanks to Legion Script for this awesome videos on youtube that gave me inspo for my project!
+    * [Link - Youtube](https://www.youtube.com/watch?v=USVjTtApVDM&list=PLPSM8rIid1a3TkwEmHyDALNuHhqiUiU5A&index=3)
+* In my navbar i used this icon for "Log Out"
+    * [Link - Flaticon](https://www.flaticon.com/free-icon/log-out_1329958?term=log%20out&page=1&position=14&page=1&position=14&related_id=1329958&origin=search)
+* In my navbar i used this icon for "Profile"
+    * [Link - Flaticon](https://www.flaticon.com/premium-icon/user_1144709)
+* In my navbar i used this icon for "Home/post list page"
+    * [Link - Flaticon](https://www.flaticon.com/free-icon/home_1946433)
+* In my navbar i used this icon for "Donation"
+    * [Link - Flaticon](https://www.flaticon.com/free-icon/coins_4994186?term=gaming&page=1&position=82&page=1&position=82&related_id=4994186&origin=search)
+* For the main icon for this page i used this icon
+    * [Link - Flaticon](https://www.flaticon.com/download/icon/landing/3104796?format=png&size=512)
+* For my landing page i used this image
+    * [Link - Pixabay](https://pixabay.com/sv/photos/utomjordisk-bakgrund-battle-star-3233076/)
+* For my success page i used this image
+    * [Link - Pixabay](https://pixabay.com/get/g9b4e95a35360dcf4d0ca701e678836e71605dae231dcebdd4e12ab2e454cc5f442a77cffe73d251521d41fba8f6c658d_1920.jpg?attachment=)
+* In my page as background i used this site to find a nice css gradient for my page
+    * [Link - Cssgradient](https://cssgradient.io/)
+* For all my buttons on the site i found this button designs
+    * [Link - Codepen](https://codepen.io/uiswarup/pen/RwNraeW)
+* For my like and dislike buttons i used this design that i found on codepen
+    * [Link - Codepen](https://codepen.io/Kallissien/pen/mwmvWd)
+
 
 ## Acknowledgements
 
@@ -291,6 +441,13 @@ Thanks to the following people and organizations who helped or inspired me for t
 * My Mentor for continuous helpful feedback.
 * Tutor support at Code Institute for their support.
 * The lessons and knowledge of [Code Institute](https://codeinstitute.net/).
+* Everything i read on stackoverflow!
+
+### Reviewers
+A special thanks goes out to those brave people who took the time to review this project. It's huge and time consuming, but it wouldn't be where it is without you.
+- Nellie Östergaard - Girlfriend, works as Frontend developer
+- Gustav Bodestad - Friend, works as Backend Developer
+
 ---
 
 ## Contact

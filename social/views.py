@@ -12,18 +12,13 @@ from django.contrib import messages
 
 # View for Post List
 class PostListView(LoginRequiredMixin, View):
-
-    def get_default_context(self, request) -> dict:
+    def get_default_context(self, request) -> dict: # get posts
         posts = Post.objects.filter().order_by('-created_on')
         return {
             'post_list': posts
         }
 
     def get(self, request, *args, **kwargs):
-        """
-        Check if user logged in, then show post from
-        other users that the current user logged in follows
-        """
         context = self.get_default_context(request)
         context["form"] = PostForm()
         return render(request, 'social/post_list.html', context)
@@ -90,6 +85,9 @@ class PostDetailView(LoginRequiredMixin, View):
 
 # Function for reply on comments
 class CommentReplyView(LoginRequiredMixin, View):
+    """
+    Reply on comments, get the parent comment then comment
+    """
     def post(self, request, post_pk, pk, *args, **kwargs):
         post = Post.objects.get(pk=post_pk)
         parent_comment = Comment.objects.get(pk=pk)
@@ -116,6 +114,9 @@ class UserIsAuthorMixin(UserPassesTestMixin):
 
 # Function for user to edit post
 class PostEditView(LoginRequiredMixin, UserIsAuthorMixin, UpdateView):
+    """
+    Get model body then edit the Post
+    """
     model = Post
     fields = ['body']
     template_name = 'social/post_edit.html'
@@ -133,6 +134,9 @@ class PostDeleteView(LoginRequiredMixin, UserIsAuthorMixin, DeleteView):
 
 # Function for user to delete comments
 class CommentDeleteView(LoginRequiredMixin, UserIsAuthorMixin, DeleteView):
+    """
+    Get specific comment then delete
+    """
     model = Comment
     template_name = 'social/comment_delete.html'
 
@@ -143,6 +147,9 @@ class CommentDeleteView(LoginRequiredMixin, UserIsAuthorMixin, DeleteView):
 
 # Function for user to edit comments
 class CommentEditView(LoginRequiredMixin, UserIsAuthorMixin, UpdateView):
+    """
+    Get specific comment then edit
+    """
     model = Comment
     fields = ['comment']
     template_name = 'social/comment_edit.html'
@@ -154,6 +161,9 @@ class CommentEditView(LoginRequiredMixin, UserIsAuthorMixin, UpdateView):
 
 # Function for user to view there profile
 class ProfileView(View):
+    """
+    Get your profile and display
+    """
     def get(self, request, pk, *args, **kwargs):
         profile = UserProfile.objects.get(pk=pk)
         user = profile.user
@@ -169,7 +179,9 @@ class ProfileView(View):
             else:
                 is_following = False
         number_of_followers = len(followers)
-
+        """
+        Show user information
+        """
         context = {
             'user': user,
             'profile': profile,
@@ -181,7 +193,7 @@ class ProfileView(View):
         return render(request, 'social/profile.html', context)
 
 
-# Function for user to edit there view
+# Function for user to edit there profile
 class ProfileEditView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = UserProfile
     fields = ['name', 'bio', 'birth_date', 'location', 'picture']
@@ -252,7 +264,6 @@ class AddLike(LoginRequiredMixin, View):
 class Dislike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
-
         is_like = False
         """
         if else statement to check if user already disliked the post
@@ -286,7 +297,6 @@ class Dislike(LoginRequiredMixin, View):
 class AddCommentLike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         comment = Comment.objects.get(pk=pk)
-
         is_dislike = False
         """
         if else statement to check if user already liked the comment
@@ -320,7 +330,6 @@ class AddCommentLike(LoginRequiredMixin, View):
 class AddCommentDislike(LoginRequiredMixin, View):
     def post(self, request, pk, *args, **kwargs):
         comment = Comment.objects.get(pk=pk)
-
         is_like = False
         """
         if else statement to check if user already disliked the comment
@@ -357,7 +366,9 @@ class UserSearch(View):
         profile_list = UserProfile.objects.filter(
             Q(user__username__icontains=query)
         )
-
+        """
+        return profile list on search
+        """
         context = {
             'profile_list': profile_list,
         }
@@ -370,7 +381,9 @@ class ListFollowers(View):
     def get(self, request, pk, *args, **kwargs):
         profile = UserProfile.objects.get(pk=pk)
         followers = profile.followers.all()
-
+        """
+        Shows profile followers in a list
+        """
         context = {
             'profile': profile,
             'followers': followers,
